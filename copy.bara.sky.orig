@@ -1,0 +1,140 @@
+"""
+Copies React Native from Piper to Git.
+Piper is the Source-Of-Truth for this repo.
+"""
+
+load("//devtools/copybara/library/workflow", "google3_glob")
+load("//devtools/copybara/library/workflow", "piper_sot_to_gerrit", "presubmit_config")
+
+RECAPTCHA_VERSION = "18.2.0"
+
+allowed_authors = {
+    "markcorner": "Mark Corner <markcorner@google.com>",
+    "walterjp": "Walter Jose <walterjp@google.com>",
+}
+
+owner_mdb = "recaptcha-eng"
+
+# Default author name for non-whitelisted authors.
+default_author = "reCAPTCHA Team <no-reply@google.com>"
+
+# License header
+LICENSE_HEADER = """\
+{comment} Copyright 2023 Google LLC
+{comment}
+{comment} Licensed under the Apache License, Version 2.0 (the "License");
+{comment} you may not use this file except in compliance with the License.
+{comment} You may obtain a copy of the License at
+{comment}
+{comment}     https://www.apache.org/licenses/LICENSE-2.0
+{comment}
+{comment} Unless required by applicable law or agreed to in writing, software
+{comment} distributed under the License is distributed on an "AS IS" BASIS,
+{comment} WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+{comment} See the License for the specific language governing permissions and
+{comment} limitations under the License.
+
+"""
+
+google3_path = "third_party/recaptcha/react_native"
+
+# Common files like OWNERS, METADATA, etc are excluded by default
+google3_excludes = [
+    # Exclude all README_internal files.
+    "**README_INTERNAL.md",
+    #    "example/assets/config/dev.json",
+    "copy.bara.sky",
+]
+
+google3_files = google3_glob(google3_path, google3_excludes)
+
+def add_license_header(
+        paths,
+        comment_chars = "#"):
+    return core.replace(
+        before = "",
+        after = LICENSE_HEADER.format(
+            comment = comment_chars,
+        ),
+        paths = paths,
+        first_only = True,
+        multiline = True,
+    )
+
+license_transformations = [
+    add_license_header(
+        comment_chars = "#",
+        paths = glob([
+            "**Gemfile",
+        ]),
+    ),
+    add_license_header(
+        comment_chars = "//",
+        paths = glob(
+            [
+                "**.ts",
+                "**.tsx",
+                "**.java",
+                "**.m",
+                "**.swift",
+                "**.h",
+                "**.js",
+                "**.kt",
+                "**build.gradle",
+            ],
+        ),
+    ),
+]
+
+all_transformations = [
+    core.move(
+        before = "google3/" + google3_path,
+        after = "",
+    ),
+    core.move(
+        before = "gitignore",
+        after = ".gitignore",
+    ),
+] + license_transformations
+
+# Testing workflow from folder to user's GoB
+# Example invocation from the google3 folder of a new client:
+# copybara third_party/recaptcha/react_native/copy.bara.sky folder_to_gerrit ./..
+core.workflow(
+    name = "folder_to_gerrit",
+    # use the flag source_ref to specify the original folder. You may have to
+    # use ./.. in order to have the "google3/" prefix to filenames not break.
+    origin = folder.origin(),
+    origin_files = google3_files,
+    destination = git.gerrit_destination(
+        url = "rpc://team/recaptcha/recaptcha-enterprise-react-native",
+        fetch = "main",
+    ),
+    authoring = authoring.overwrite(default_author),
+    mode = "ITERATIVE",
+    transformations = all_transformations,
+)
+
+# Deploy to github
+# If you make a change, you will need to delete the github branch to try again.
+# copybara third_party/recaptcha/react_native/copy.bara.sky deploy_react_native ../. --squash  --force-author "Mark Corner <markcorner@google.com>"
+core.workflow(
+    name = "deploy_react_native",
+    # use the flag source_ref to specify the original folder. You may have to
+    # use ./.. in order to have the "google3/" prefix to filenames not break.
+    origin = folder.origin(),
+    origin_files = google3_files,
+    destination = git.github_destination(
+        url = "https://github.com/GoogleCloudPlatform/recaptcha-enterprise-react-native",
+        fetch = "main",
+        push = "release-v" + RECAPTCHA_VERSION,
+    ),
+    authoring = authoring.allowed(
+        default = default_author,
+        allowlist = allowed_authors.keys(),
+    ),
+    mode = "ITERATIVE",
+    transformations = all_transformations + [
+        metadata.replace_message("Deploying RecaptchaEnterprise React Native version " + RECAPTCHA_VERSION),
+    ],
+)
