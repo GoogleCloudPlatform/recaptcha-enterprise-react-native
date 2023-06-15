@@ -13,7 +13,7 @@
 // limitations under the License.
 
 import {RecaptchaEnterpriseReactNative} from './module';
-import {RecaptchaAction} from './recaptcha_action';
+import type { RecaptchaAction } from './recaptcha_action';
 
 interface Args {
   [key: string]: number|string;
