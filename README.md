@@ -17,21 +17,35 @@ For general documentation on reCAPTCHA Enterprise for mobile applications, see
 and
 [iOS](https://cloud.google.com/recaptcha-enterprise/docs/instrument-ios-apps).
 
+## Setup
+
+Add the package to your React Native project:
+
+`npx yarn add @google-cloud/recaptcha-enterprise-react-native`
+
 ## Podfile
 
-At this time the library requires framworks and static linkage:
+Similar to
+[Firebase](https://rnfirebase.io/#altering-cocoapods-to-use-frameworks), the
+library requires frameworks and static linkage:
 
 `use_frameworks! :linkage => :static`
 
-Basic state setup:
+And flipper is not compatible with static linkage so disable flipper in the
+Podfile:
+
+`flipper_config = FlipperConfiguration.disabled`
+
+## Basic usage
 
 ```
-import { execute, initClient, RecaptchaAction, } from 'recaptcha-enterprise-react-native';
+import { execute, initClient, RecaptchaAction, } from '@google-cloud/recaptcha-enterprise-react-native';
 
 const [initResult, setInitResult] = React.useState<string | undefined>();
 const [executeResult, setExecuteResult] = React.useState<
   string | undefined
 >();
+const [token, setToken] = React.useState<string | undefined>();
 ```
 
 Init:
@@ -55,6 +69,20 @@ execute(RecaptchaAction.LOGIN(), 10000)
     setExecuteResult(error.toString());
   })
 ```
+
+## Common Problems:
+
+*   `error: include of non-modular header inside framework module
+    'RecaptchaEnterprise.Recaptcha'
+
+Use static linking in pods, for instance: `USE_FRAMEWORKS=static pod install` or
+`use_frameworks! :linkage => :static` in your Podfile.
+
+*   `fatal error: 'FlipperKit/FlipperClient.h' file not found #import
+    <FlipperKit/FlipperClient.h>`
+
+Flipper is not yet compatible with static linkage, so disable flipper in your
+Podfile: `flipper_config = FlipperConfiguration.disabled`
 
 ## Example App
 
