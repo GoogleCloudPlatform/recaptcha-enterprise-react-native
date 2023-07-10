@@ -33,26 +33,24 @@ class RecaptchaEnterpriseReactNative: NSObject {
     resolve: @escaping RCTPromiseResolveBlock,
     reject: @escaping RCTPromiseRejectBlock
   ) {
-    Task { @MainActor in
-      let getClientClosure: (RecaptchaClient?, Error?) -> Void = { recaptchaClient, error in
-        if let recaptchaClient = recaptchaClient {
-          self.recaptchaClient = recaptchaClient
-          resolve(nil)
-        } else if let error = error {
-          guard let error = error as? RecaptchaError else {
-            reject("RN_CAST_ERROR", "Not a RecaptchaError", nil)
-            return
-          }
-          reject(String(error.errorCode), error.errorMessage, nil)
+    let getClientClosure: (RecaptchaClient?, Error?) -> Void = { recaptchaClient, error in
+      if let recaptchaClient = recaptchaClient {
+        self.recaptchaClient = recaptchaClient
+        resolve(nil)
+      } else if let error = error {
+        guard let error = error as? RecaptchaError else {
+          reject("RN_CAST_ERROR", "Not a RecaptchaError", nil)
+          return
         }
+        reject(String(error.errorCode), error.errorMessage, nil)
       }
+    }
 
-      if let args = arguments as? [String: Any], let timeout = args["timeout"] as? Double {
-        Recaptcha.getClient(
-          withSiteKey: siteKey, withTimeout: timeout, completion: getClientClosure)
-      } else {
-        Recaptcha.getClient(withSiteKey: siteKey, completion: getClientClosure)
-      }
+    if let args = arguments as? [String: Any], let timeout = args["timeout"] as? Double {
+      Recaptcha.getClient(
+        withSiteKey: siteKey, withTimeout: timeout, completion: getClientClosure)
+    } else {
+      Recaptcha.getClient(withSiteKey: siteKey, completion: getClientClosure)
     }
   }
 

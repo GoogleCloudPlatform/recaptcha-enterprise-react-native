@@ -1,3 +1,7 @@
+## 18.2.2
+
+Upgrade iOS SDK to 18.2.2
+
 ## 18.2.1+1
 
 * Improve documentation, lower iOS minimum version to 11
