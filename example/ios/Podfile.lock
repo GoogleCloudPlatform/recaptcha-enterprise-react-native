@@ -309,10 +309,10 @@ PODS:
     - React-jsi (= 0.70.6)
     - React-logger (= 0.70.6)
     - React-perflogger (= 0.70.6)
-  - recaptcha-enterprise-react-native (18.2.1):
+  - recaptcha-enterprise-react-native (18.2.2):
     - React-Core
-    - RecaptchaEnterprise (= 18.2.1)
-  - RecaptchaEnterprise (18.2.1):
+    - RecaptchaEnterprise (= 18.2.2)
+  - RecaptchaEnterprise (18.2.2):
     - RecaptchaInterop (~> 18.2.1)
   - RecaptchaInterop (18.2.1)
   - Yoga (1.14.0)
@@ -475,8 +475,8 @@ SPEC CHECKSUMS:
   React-RCTVibration: c75ceef7aa60a33b2d5731ebe5800ddde40cefc4
   React-runtimeexecutor: 15437b576139df27635400de0599d9844f1ab817
   ReactCommon: 349be31adeecffc7986a0de875d7fb0dcf4e251c
-  recaptcha-enterprise-react-native: 72dfa68b2c2343b3921917b4ba90a6b605c0beb6
-  RecaptchaEnterprise: 172528a3f97f4b115c78c111855f7b79d1c1fff3
+  recaptcha-enterprise-react-native: b7a8cc466f74e18a61b3e11e3448e1f71e6a18b2
+  RecaptchaEnterprise: 3959c4a60afa01021f4e75f60644ce5fc4b8e90e
   RecaptchaInterop: df2e3c6d5b27abf3367234e9ba6fc316e4540a07
   Yoga: 99caf8d5ab45e9d637ee6e0174ec16fbbb01bcfc
 

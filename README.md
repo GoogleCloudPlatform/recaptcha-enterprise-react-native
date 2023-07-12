@@ -72,8 +72,7 @@ execute(RecaptchaAction.LOGIN(), 10000)
 
 ## Common Problems:
 
-*   `error: include of non-modular header inside framework module
-    'RecaptchaEnterprise.Recaptcha'
+*   `error: include of non-modular header inside framework module 'RecaptchaEnterprise.Recaptcha'`
 
 Use static linking in pods, for instance: `USE_FRAMEWORKS=static pod install` or
 `use_frameworks! :linkage => :static` in your Podfile.
@@ -100,8 +99,6 @@ cd example && npx react-native run-ios
 
 brew tap wix/brew && brew install applesimutils
 
-cd example && npx detox build --configuration ios.sim.debug && npx detox test
---configuration ios.sim.debug
+cd example && npx detox build --configuration ios.sim.debug && npx detox test --configuration ios.sim.debug
 
-cd example && npx detox build --configuration android.emu.debug && npx detox
-test --configuration android.emu.debug
+cd example && npx detox build --configuration android.emu.debug && npx detox test --configuration android.emu.debug

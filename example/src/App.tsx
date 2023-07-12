@@ -20,7 +20,7 @@ import {
   execute,
   initClient,
   RecaptchaAction,
-} from 'recaptcha-enterprise-react-native';
+} from '@google-cloud/recaptcha-enterprise-react-native';
 
 export default function App() {
   const [initResult, setInitResult] = React.useState<string | undefined>();
