@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
   s.source_files = "ios/**/*.{h,m,mm,swift}"
 
   s.dependency "React-Core"
-  s.dependency "RecaptchaEnterprise", '=18.2.2'
+  s.dependency "RecaptchaEnterprise", '=18.3.0'
 
   s.static_framework = true
 

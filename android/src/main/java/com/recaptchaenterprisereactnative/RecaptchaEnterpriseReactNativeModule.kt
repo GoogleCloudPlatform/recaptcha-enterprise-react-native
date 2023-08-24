@@ -64,12 +64,11 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
 
   @ReactMethod
   fun initClient(siteKey: String, arguments: ReadableMap, promise: Promise) {
-    // JS+ReadableMap have no support for long
-    val timeout = arguments.getDouble("timeout").toLong()
-
     GlobalScope.launch {
       let {
-          if (timeout != null) {
+          if (arguments.hasKey("timeout")) {
+            // JS+ReadableMap have no support for long
+            val timeout = arguments.getDouble("timeout").toLong()
             Recaptcha.getClient(application, siteKey, timeout)
           } else {
             Recaptcha.getClient(application, siteKey)
@@ -85,7 +84,7 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
 
   @ReactMethod
   fun execute(actionStr: String, arguments: ReadableMap, promise: Promise) {
-    if (!this::recaptchaClient.isInitialized || recaptchaClient == null) {
+    if (!this::recaptchaClient.isInitialized) {
       promise.reject("RN_EXECUTE_FAILED", "Initialize client first", null)
       return
     }
@@ -96,7 +95,7 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
 
     GlobalScope.launch {
       recaptchaClient
-        .let { if (timeout != null) it.execute(action, timeout) else it.execute(action) }
+        .let { if (arguments.hasKey("timeout")) it.execute(action, timeout) else it.execute(action) }
         .onSuccess { token -> promise.resolve(token) }
         .onFailure { exception -> promise.reject(exception) }
     }

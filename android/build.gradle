@@ -101,7 +101,7 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation 'com.google.android.recaptcha:recaptcha:18.2.1'
+  implementation 'com.google.android.recaptcha:recaptcha:18.3.0'
 }
 
 if (isNewArchitectureEnabled()) {

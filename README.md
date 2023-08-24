@@ -87,7 +87,7 @@ Podfile: `flipper_config = FlipperConfiguration.disabled`
 
 Install prerequisites:
 
-npm update cd example && npm update cd example/ios && pod install
+npx yarn install && cd example && npx yarn install && cd ios && pod install
 
 ### Run sample app:
 
