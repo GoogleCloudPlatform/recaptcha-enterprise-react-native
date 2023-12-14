@@ -89,13 +89,19 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
       return
     }
 
-    // JS+ReadableMap have no support for long
-    val timeout = arguments.getDouble("timeout").toLong()
     val action = mapAction(actionStr)
 
     GlobalScope.launch {
       recaptchaClient
-        .let { if (arguments.hasKey("timeout")) it.execute(action, timeout) else it.execute(action) }
+        .let {
+          if (arguments.hasKey("timeout")) {
+            // JS+ReadableMap have no support for long
+            val timeout = arguments.getDouble("timeout").toLong()
+            it.execute(action, timeout)
+          } else {
+            it.execute(action)
+          }
+        }
         .onSuccess { token -> promise.resolve(token) }
         .onFailure { exception -> promise.reject(exception) }
     }
