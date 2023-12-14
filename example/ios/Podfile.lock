@@ -309,10 +309,10 @@ PODS:
     - React-jsi (= 0.70.6)
     - React-logger (= 0.70.6)
     - React-perflogger (= 0.70.6)
-  - recaptcha-enterprise-react-native (18.3.0):
+  - recaptcha-enterprise-react-native (18.4.0):
     - React-Core
-    - RecaptchaEnterprise (= 18.3.0)
-  - RecaptchaEnterprise (18.3.0):
+    - RecaptchaEnterprise (= 18.4.0)
+  - RecaptchaEnterprise (18.4.0):
     - RecaptchaInterop (~> 100.0.0)
   - RecaptchaInterop (100.0.0)
   - Yoga (1.14.0)
@@ -475,11 +475,11 @@ SPEC CHECKSUMS:
   React-RCTVibration: c75ceef7aa60a33b2d5731ebe5800ddde40cefc4
   React-runtimeexecutor: 15437b576139df27635400de0599d9844f1ab817
   ReactCommon: 349be31adeecffc7986a0de875d7fb0dcf4e251c
-  recaptcha-enterprise-react-native: 8c142509f1878e81fe7395ab4e06fe177875fc37
-  RecaptchaEnterprise: 9b60bc1e1633d120e24a098d80546776fab1282e
+  recaptcha-enterprise-react-native: 7d63c5bdde3b48996b984a86ac2b536a1d8f5f16
+  RecaptchaEnterprise: dc302910b77963a0cc6f6908407e30b35268a755
   RecaptchaInterop: 7d1a4a01a6b2cb1610a47ef3f85f0c411434cb21
   Yoga: 99caf8d5ab45e9d637ee6e0174ec16fbbb01bcfc
 
-PODFILE CHECKSUM: ab598883a61e86008d9cf3b61f344bd0b355263b
+PODFILE CHECKSUM: f31868890320c60b87e8ed8ae523575ad0412864
 
 COCOAPODS: 1.12.1

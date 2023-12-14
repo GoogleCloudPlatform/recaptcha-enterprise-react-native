@@ -8,7 +8,7 @@ target 'RecaptchaEnterpriseReactNativeExample' do
   # use_frameworks! is required
   # Also see: https://github.com/facebook/react-native/issues/34344
   use_frameworks! :linkage => :static
-  
+
   config = use_native_modules!
 
   # Flags change depending on the env values.
@@ -37,6 +37,12 @@ target 'RecaptchaEnterpriseReactNativeExample' do
       # necessary for Mac Catalyst builds
       :mac_catalyst_enabled => false
     )
+    # From: https://github.com/facebook/react-native/issues/34106#issuecomment-1417685116
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+        config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '12.4'
+      end
+    end
     __apply_Xcode_12_5_M1_post_install_workaround(installer)
   end
 end
