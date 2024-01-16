@@ -36,6 +36,14 @@ Podfile:
 
 `flipper_config = FlipperConfiguration.disabled`
 
+If you still want to use Flipper with the library, you can have a workaround like this: 
+
+```
+# Not using use_frameworks here
+pod 'RecaptchaEnterprise', :modular_headers => true
+pod 'RecaptchaInterop', :modular_headers => true
+```
+
 ## Basic usage
 
 ```
