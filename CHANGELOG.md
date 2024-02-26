@@ -1,3 +1,7 @@
+## 18.4.2
+
+Upgrade iOS to 18.4.2
+
 ## 18.4.0
 
 Upgrade iOS and Android SDK to 18.4.0
