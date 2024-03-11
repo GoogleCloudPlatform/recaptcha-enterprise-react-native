@@ -27,6 +27,6 @@ runs:
       shell: bash
 
     - name: Install node_modules for example
-      run: yarn install --frozen-lockfile --cwd example
+      run: cd example && yarn install --frozen-lockfile
       shell: bash
 
