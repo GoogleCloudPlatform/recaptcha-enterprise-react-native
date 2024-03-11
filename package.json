@@ -32,9 +32,7 @@
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib",
     "prepare": "npx bob build",
-    "release": "release-it",
-    "test:e2e:android": "cd example; npx detox build --configuration android.emu.release; npx detox test --configuration android.emu.release",
-    "test:e2e:ios": "cd example; npx detox build --configuration ios.sim.release; npx detox test --configuration ios.sim.release"
+    "release": "release-it"
   },
   "keywords": [
     "react-native",

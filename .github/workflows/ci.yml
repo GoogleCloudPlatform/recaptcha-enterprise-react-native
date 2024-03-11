@@ -74,13 +74,13 @@ jobs:
             echo "turbo_cache_hit=1" >> $GITHUB_ENV
           fi
 
-      - name: Install JDK
-        if: env.turbo_cache_hit != 1
+      - name: Setup Java
         uses: actions/setup-java@v3
         with:
-          distribution: 'zulu'
-          java-version: '17'
-
+          cache: gradle
+          distribution: temurin
+          java-version: 17
+    
       - name: Finalize Android SDK
         if: env.turbo_cache_hit != 1
         run: |
@@ -188,15 +188,15 @@ jobs:
     
       - name: Detox rebuild framework cache
         run: |
-          cd example/ios
+          cd example
           yarn detox rebuild-framework-cache
 
       - name: Detox build
         run:  |
-          cd example/ios
+          cd example
           yarn detox build --configuration ios.sim.release
 
       - name: Detox test
         run:  |
-          cd example/ios
+          cd example
           yarn detox test --configuration ios.sim.release --cleanup --headless --record-logs all      
