@@ -15,7 +15,7 @@
 import * as React from 'react';
 import Config from 'react-native-config';
 
-import {Button, Platform, StyleSheet, Text, View} from 'react-native';
+import { Button, Platform, StyleSheet, Text, View } from 'react-native';
 import {
   execute,
   initClient,
@@ -23,7 +23,7 @@ import {
 } from '@google-cloud/recaptcha-enterprise-react-native';
 
 export default function App() {
-  const [initResult, setInitResult] = React.useState<string | undefined>();
+  const [initResult, setInitResult] = React.useState<string>('Not Initialized');
   const [executeResult, setExecuteResult] = React.useState<
     string | undefined
   >();
@@ -38,7 +38,9 @@ export default function App() {
       <Button
         onPress={() =>
           initClient(siteKey ?? 'SITEKEY', 10000)
-            .then(setInitResult('ok'))
+            .then(() => {
+              setInitResult('ok');
+            })
             .catch((error) => {
               setInitResult(error.toString());
             })
@@ -52,9 +54,9 @@ export default function App() {
       <Button
         onPress={() =>
           execute(RecaptchaAction.LOGIN(), 10000)
-            .then((token) => {
-              setExecuteResult(token.startsWith('03') ? 'ok' : 'error');
-              setToken(token);
+            .then((newToken) => {
+              setExecuteResult(newToken.startsWith('03') ? 'ok' : 'error');
+              setToken(newToken);
             })
             .catch((error) => {
               setExecuteResult(error.toString());

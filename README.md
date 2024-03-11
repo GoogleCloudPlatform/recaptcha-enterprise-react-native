@@ -23,6 +23,10 @@ Add the package to your React Native project:
 
 `npx yarn add @google-cloud/recaptcha-enterprise-react-native`
 
+If using VSCode install eslint:
+
+`https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint`
+
 ## Podfile
 
 Similar to

@@ -20,14 +20,14 @@ export class RecaptchaAction {
   }
 
   static LOGIN() {
-    return new RecaptchaAction('login')
+    return new RecaptchaAction('login');
   }
 
   static SIGNUP() {
-    return new RecaptchaAction('signup')
+    return new RecaptchaAction('signup');
   }
 
   static custom(action: string) {
-    return new RecaptchaAction(action)
+    return new RecaptchaAction(action);
   }
 }

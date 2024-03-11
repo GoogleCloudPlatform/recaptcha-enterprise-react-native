@@ -13,8 +13,8 @@
 // limitations under the License.
 
 import { NativeModules, Platform } from 'react-native';
-export {execute, initClient} from './recaptcha';
-export {RecaptchaAction} from './recaptcha_action';
+export { execute, initClient } from './recaptcha';
+export { RecaptchaAction } from './recaptcha_action';
 
 const LINKING_ERROR =
   `The package '@google-cloud/recaptcha-enterprise-react-native' doesn't seem to be linked. Make sure: \n\n` +
@@ -22,13 +22,14 @@ const LINKING_ERROR =
   '- You rebuilt the app after installing the package\n' +
   '- You are not using Expo Go\n';
 
-export const RecaptchaEnterpriseReactNative = NativeModules.RecaptchaEnterpriseReactNative
-  ? NativeModules.RecaptchaEnterpriseReactNative
-  : new Proxy(
-      {},
-      {
-        get() {
-          throw new Error(LINKING_ERROR);
-        },
-      }
-    );
+export const RecaptchaEnterpriseReactNative =
+  NativeModules.RecaptchaEnterpriseReactNative
+    ? NativeModules.RecaptchaEnterpriseReactNative
+    : new Proxy(
+        {},
+        {
+          get() {
+            throw new Error(LINKING_ERROR);
+          },
+        }
+      );
