@@ -116,7 +116,6 @@ jobs:
           arch: x86_64
           avd-name: ${{ steps.device.outputs.AVD_NAME }}
           script: cd example && yarn detox test --configuration android.emu.release --headless --record-logs all
-COPY    
 
   build-ios-e2e:
     runs-on: macos-14
