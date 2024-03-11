@@ -47,7 +47,7 @@ jobs:
       - name: Build package
         run: yarn prepare
 
-  build-android:
+  build-android-e2e:
     runs-on: ubuntu-latest
     env:
       TURBO_CACHE_DIR: .turbo/android
@@ -102,8 +102,12 @@ jobs:
           JAVA_OPTS: "-XX:MaxHeapSize=6g"
         run: |
           yarn turbo run build:android --cache-dir="${{ env.TURBO_CACHE_DIR }}"
+      
+      - name: E2E test for Android
+        run: yarn test:e2e:android
+        
 
-  build-ios:
+  build-ios-e2e:
     runs-on: macos-14
     env:
       TURBO_CACHE_DIR: .turbo/ios
@@ -152,3 +156,8 @@ jobs:
       - name: Build example for iOS
         run: |
           yarn turbo run build:ios --cache-dir="${{ env.TURBO_CACHE_DIR }}"
+    
+      - name: E2E test for iOS
+        run: yarn test:e2e:ios
+        
+      
