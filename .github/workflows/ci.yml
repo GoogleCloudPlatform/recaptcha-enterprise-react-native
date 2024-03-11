@@ -139,6 +139,11 @@ jobs:
       - name: Setup
         uses: ./.github/actions/setup
       
+      - name: Select xcode version
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '15.1'
+
       - name: Install macOS dependencies
         run: |
           brew tap wix/brew
