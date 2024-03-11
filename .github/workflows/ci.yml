@@ -126,7 +126,7 @@ jobs:
           api-level: 31
           arch: x86_64
           avd-name: ${{ steps.device.outputs.AVD_NAME }}
-          script: cd example && yarn install && yarn detox test --configuration android.emu.release --headless --record-logs all
+          script: cd example && yarn detox test --configuration android.emu.release --headless --record-logs all
 
   build-ios-e2e:
     runs-on: macos-14
@@ -204,4 +204,4 @@ jobs:
       - name: Detox test
         run:  |
           cd example
-          yarn install && yarn detox test --configuration ios.sim.release --cleanup --headless --record-logs all      
+          yarn detox test --configuration ios.sim.release --cleanup --headless --record-logs all      
