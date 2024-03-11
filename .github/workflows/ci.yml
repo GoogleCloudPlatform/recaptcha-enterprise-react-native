@@ -204,4 +204,4 @@ jobs:
       - name: Detox test
         run:  |
           cd example
-          yarn detox test --configuration ios.sim.release --cleanup --headless --record-logs all      
+          yarn detox test --configuration ios.sim.release --headless --record-logs all      
