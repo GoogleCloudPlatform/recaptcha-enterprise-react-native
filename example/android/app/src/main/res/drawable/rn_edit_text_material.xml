@@ -13,7 +13,7 @@
      See the License for the specific language governing permissions and
      limitations under the License.
 -->
-<inset xmlns:android="https://schemas.android.com/apk/res/android"
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
        android:insetLeft="@dimen/abc_edit_text_inset_horizontal_material"
        android:insetRight="@dimen/abc_edit_text_inset_horizontal_material"
        android:insetTop="@dimen/abc_edit_text_inset_top_material"

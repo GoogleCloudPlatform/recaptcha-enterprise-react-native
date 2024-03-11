@@ -27,6 +27,10 @@ If using VSCode install eslint:
 
 `https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint`
 
+You may need to use an older JDK:
+
+`export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-19-latest/Contents/Home`
+
 ## Podfile
 
 Similar to

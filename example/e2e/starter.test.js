@@ -1,3 +1,5 @@
+import { by, device, expect, element, waitFor } from 'detox';
+
 describe('Example', () => {
   beforeAll(async () => {
     await device.launchApp();
@@ -13,6 +15,9 @@ describe('Example', () => {
 
   it('should show ok after initialization', async () => {
     await element(by.id('initButtonId')).tap();
+    await waitFor(element(by.id('initResultId')))
+      .toHaveText('ok')
+      .withTimeout(5000);
     await expect(element(by.id('initResultId'))).toHaveText('ok');
   });
 
