@@ -103,9 +103,6 @@ jobs:
         run: |
           yarn turbo run build:android --cache-dir="${{ env.TURBO_CACHE_DIR }}"
       
-      - name: Detox rebuild framework cache
-        run: yarn detox rebuild-framework-cache
-      
       - name: E2E test for Android
         run: yarn test:e2e:android
         
@@ -160,6 +157,9 @@ jobs:
         run: |
           yarn turbo run build:ios --cache-dir="${{ env.TURBO_CACHE_DIR }}"
     
+      - name: Detox rebuild framework cache
+        run: yarn detox rebuild-framework-cache
+
       - name: E2E test for iOS
         run: yarn test:e2e:ios
         
