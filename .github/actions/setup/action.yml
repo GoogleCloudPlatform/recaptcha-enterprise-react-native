@@ -8,6 +8,7 @@ runs:
       uses: actions/setup-node@v3
       with:
         node-version-file: .nvmrc
+        cache: yarn
 
     - name: Cache dependencies
       id: yarn-cache
@@ -26,7 +27,7 @@ runs:
       run: yarn install --immutable
       shell: bash
 
-    - name: Install node_modules for example
-      run: cd example && yarn install --frozen-lockfile
+    - name: Install yarn for example
+      run: cd example && yarn install --immutable
       shell: bash
 
