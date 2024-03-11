@@ -106,7 +106,7 @@ jobs:
       - name: Get device name
         id: device
         run: |
-          cd example/ios
+          cd example
           node -e "console.log('AVD_NAME=' + require('./.detoxrc').devices.emulator.device.avdName)" >> $GITHUB_OUTPUT
       
       - name: E2E test for Android
@@ -127,6 +127,14 @@ jobs:
 
       - name: Setup
         uses: ./.github/actions/setup
+      
+      - name: Install macOS dependencies
+        run: |
+          brew tap wix/brew
+          brew install applesimutils
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: 1
+          HOMEBREW_NO_INSTALL_CLEANUP: 1
 
       - name: Cache turborepo for iOS
         uses: actions/cache@v3
