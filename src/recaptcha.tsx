@@ -12,11 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import {RecaptchaEnterpriseReactNative} from './index';
+import { RecaptchaEnterpriseReactNative } from './index';
 import type { RecaptchaAction } from './recaptcha_action';
 
 interface Args {
-  [key: string]: number|string;
+  [key: string]: number | string;
 }
 
 /**
@@ -28,7 +28,7 @@ export function initClient(siteKey: string, timeout?: number): Promise<string> {
   let args: Args = {};
 
   if (timeout) {
-    args['timeout'] = timeout;
+    args.timeout = timeout;
   }
 
   return RecaptchaEnterpriseReactNative.initClient(siteKey, args);
@@ -40,11 +40,13 @@ export function initClient(siteKey: string, timeout?: number): Promise<string> {
  * @param timeout An optional timeout value in milliseconds
  */
 export function execute(
-    action: RecaptchaAction, timeout?: number): Promise<string> {
+  action: RecaptchaAction,
+  timeout?: number
+): Promise<string> {
   let args: Args = {};
 
   if (timeout) {
-    args['timeout'] = timeout;
+    args.timeout = timeout;
   }
 
   return RecaptchaEnterpriseReactNative.execute(action.action, args);

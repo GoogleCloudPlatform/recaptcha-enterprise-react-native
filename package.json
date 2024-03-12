@@ -63,6 +63,8 @@
     "del-cli": "^5.1.0",
     "eslint": "^8.51.0",
     "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jest": "^27.9.0",
     "eslint-plugin-prettier": "^5.0.1",
     "jest": "^29.7.0",
     "prettier": "^3.0.3",
@@ -86,6 +88,9 @@
   "packageManager": "yarn@3.6.1",
   "jest": {
     "preset": "react-native",
+    "testPathIgnorePatterns": [
+      "example/e2e"
+    ],
     "modulePathIgnorePatterns": [
       "<rootDir>/example/node_modules",
       "<rootDir>/lib/"
@@ -115,6 +120,9 @@
   },
   "eslintConfig": {
     "root": true,
+    "env": {
+      "jest": true
+    },
     "extends": [
       "@react-native",
       "prettier"
