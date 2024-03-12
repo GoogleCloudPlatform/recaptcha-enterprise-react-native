@@ -64,7 +64,7 @@ jobs:
           distribution: temurin
           java-version: 17
 
-     - name: Write sitekeys to file
+      - name: Write sitekeys to file
         env:
           EXAMPLE_ENV: ${{ secrets.EXAMPLE_ENV }}
         run: echo "$EXAMPLE_ENV" >> example/.env
