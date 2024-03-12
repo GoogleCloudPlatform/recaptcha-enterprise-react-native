@@ -148,7 +148,7 @@ jobs:
             ${{ runner.os }}-example-pods-
 
       - name: Install Example CocoaPods
-        if: steps.cache-example-cocoapods.outputs.cache-hit != 'true'
+#        if: steps.cache-example-cocoapods.outputs.cache-hit != 'true'
         run: cd example/ios ; pod install
 
       - name: Build example for iOS
