@@ -132,11 +132,11 @@ jobs:
           EXAMPLE_ENV: ${{ secrets.EXAMPLE_ENV }}
         run: echo "$EXAMPLE_ENV" >> example/.env
 
-      - name: Cache XCode Derived Data
-        uses: irgaly/xcode-cache@v1
-        with:
-          key: xcode-cache-deriveddata-${{ github.workflow }}-${{ github.sha }}
-          restore-keys: xcode-cache-deriveddata-${{ github.workflow }}-
+#      - name: Cache XCode Derived Data
+#        uses: irgaly/xcode-cache@v1
+#        with:
+#          key: xcode-cache-deriveddata-${{ github.workflow }}-${{ github.sha }}
+#          restore-keys: xcode-cache-deriveddata-${{ github.workflow }}-
 
       - name: Cache Example CocoaPods
         id: cache-example-cocoapods
