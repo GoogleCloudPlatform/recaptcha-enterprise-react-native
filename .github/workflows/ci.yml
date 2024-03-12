@@ -63,7 +63,14 @@ jobs:
           cache: 'gradle'
           distribution: temurin
           java-version: 17
-    
+
+     - name: Write sitekeys to file
+        env:
+          EXAMPLE_ENV: ${{ secrets.EXAMPLE_ENV }}
+        shell: bash
+        run: |
+          echo "$EXAMPLE_ENV" >> example/.env
+
       - name: Finalize Android SDK
         run: |
           /bin/bash -c "yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses > /dev/null"
@@ -121,6 +128,13 @@ jobs:
         env:
           HOMEBREW_NO_AUTO_UPDATE: 1
           HOMEBREW_NO_INSTALL_CLEANUP: 1
+
+      - name: Write sitekeys to file
+        env:
+          EXAMPLE_ENV: ${{ secrets.EXAMPLE_ENV }}
+        shell: bash
+        run: |
+          echo "$EXAMPLE_ENV" >> example/.env
 
       - name: Cache XCode Derived Data
         uses: irgaly/xcode-cache@v1
