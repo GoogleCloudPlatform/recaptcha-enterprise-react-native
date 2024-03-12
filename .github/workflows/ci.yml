@@ -68,8 +68,7 @@ jobs:
         env:
           EXAMPLE_ENV: ${{ secrets.EXAMPLE_ENV }}
         shell: bash
-        run: |
-          echo "$EXAMPLE_ENV" >> example/.env
+        run: echo "$EXAMPLE_ENV" >> example/.env
 
       - name: Finalize Android SDK
         run: |
@@ -133,8 +132,7 @@ jobs:
         env:
           EXAMPLE_ENV: ${{ secrets.EXAMPLE_ENV }}
         shell: bash
-        run: |
-          echo "$EXAMPLE_ENV" >> example/.env
+        run: echo "$EXAMPLE_ENV" >> example/.env
 
       - name: Cache XCode Derived Data
         uses: irgaly/xcode-cache@v1
