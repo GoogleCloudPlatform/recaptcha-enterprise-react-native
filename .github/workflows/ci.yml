@@ -124,9 +124,9 @@ jobs:
 
       - name: Cache XCode Derived Data
         uses: irgaly/xcode-cache@v1
-          with:
-            key: xcode-cache-deriveddata-${{ github.workflow }}-${{ github.sha }}
-            restore-keys: xcode-cache-deriveddata-${{ github.workflow }}-
+        with:
+          key: xcode-cache-deriveddata-${{ github.workflow }}-${{ github.sha }}
+          restore-keys: xcode-cache-deriveddata-${{ github.workflow }}-
 
       - name: Cache Example CocoaPods
         id: cache-example-cocoapods
