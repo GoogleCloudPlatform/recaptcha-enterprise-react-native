@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
 
   s.source_files = "ios/**/*.{h,m,mm,swift}"
 
-  s.dependency "RecaptchaEnterprise", "=18.4.2"
+  s.dependency "RecaptchaEnterprise", "=18.5.0-beta02"
   s.static_framework = true
 
   # Use install_modules_dependencies helper to install the dependencies if React Native version >=0.71.0.
