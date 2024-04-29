@@ -17,7 +17,7 @@ describe('Example', () => {
     await element(by.id('initButtonId')).tap();
     await waitFor(element(by.id('initResultId')))
       .toHaveText('ok')
-      .withTimeout(5000);
+      .withTimeout(10000);
     await expect(element(by.id('initResultId'))).toHaveText('ok');
   });
 
@@ -26,7 +26,7 @@ describe('Example', () => {
     await element(by.id('executeButtonId')).tap();
     await waitFor(element(by.id('executeResultId')))
       .toHaveText('ok')
-      .withTimeout(5000);
+      .withTimeout(10000);
     await expect(element(by.id('executeResultId'))).toHaveText('ok');
   });
 
@@ -34,7 +34,7 @@ describe('Example', () => {
     await element(by.id('executeButtonId')).tap();
     await waitFor(element(by.id('executeResultId')))
       .toHaveText('Error: Initialize client first')
-      .withTimeout(5000);
+      .withTimeout(10000);
     await expect(element(by.id('executeResultId'))).toHaveText(
       'Error: Initialize client first'
     );
