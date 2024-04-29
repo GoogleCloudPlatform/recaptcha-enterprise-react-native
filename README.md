@@ -1,8 +1,5 @@
 # reCAPTCHA Enterprise React Native Module
 
-NOTE: This plugin is considered a Public Preview at this stage and the public
-API is subject to change.
-
 Please note that issues filed in this repository are not an official Google
 support channel and are answered on a best effort basis. For official support,
 please visit: https://cloud.google.com/support-hub.
