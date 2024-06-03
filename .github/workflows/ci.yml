@@ -105,7 +105,7 @@ jobs:
           script: cd example && yarn detox test --configuration android.emu.release --headless --record-logs all
 
   build-ios-e2e:
-    runs-on: macos-14
+    runs-on: macos-14-xlarge
 
     steps:
       - name: Checkout
@@ -165,7 +165,7 @@ jobs:
           yarn detox build --configuration ios.sim.release
 
       - name: Detox test
-        continue-on-error: true # iOS test is flaky, run locally for now
+#        continue-on-error: true # iOS test is flaky, run locally for now
         run:  |
           cd example
           yarn detox test --configuration ios.sim.release --headless --record-logs all      
