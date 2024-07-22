@@ -1,5 +1,11 @@
+## 18.5.1
+Upgrade iOS and Android SDK to 18.5.1
+
+## 18.5.0
+Upgrade iOS and Android SDK to 18.5.0
+
 ## 18.5.0-beta02
-Upgrade iOS an Android SDK to 18.5.0-beta02
+Upgrade iOS and Android SDK to 18.5.0-beta02
 
 ## 18.4.2
 
