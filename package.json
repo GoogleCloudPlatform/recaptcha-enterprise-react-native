@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/recaptcha-enterprise-react-native",
-  "version": "18.5.1",
+  "version": "18.6.0",
   "description": "React Native plugin for reCAPTCHA Enterprise Mobile SDK",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
