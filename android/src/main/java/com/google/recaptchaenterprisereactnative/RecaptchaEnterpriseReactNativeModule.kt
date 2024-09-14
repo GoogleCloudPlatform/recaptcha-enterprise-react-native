@@ -25,6 +25,7 @@ import com.facebook.react.bridge.ReadableMap
 import com.google.android.recaptcha.Recaptcha
 import com.google.android.recaptcha.RecaptchaAction
 import com.google.android.recaptcha.RecaptchaClient
+import com.google.android.recaptcha.RecaptchaException
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -49,22 +50,13 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
   }
 
   @ReactMethod
-  fun initClient(siteKey: String, arguments: ReadableMap, promise: Promise) {
+  fun initClient(siteKey: String, promise: Promise) {
     GlobalScope.launch {
-      let {
-          if (arguments.hasKey("timeout")) {
-            // JS+ReadableMap have no support for long
-            val timeout = arguments.getDouble("timeout").toLong()
-            Recaptcha.getClient(application, siteKey, timeout)
-          } else {
-            Recaptcha.getClient(application, siteKey)
-          }
+        try {
+            recaptchaClient = Recaptcha.fetchClient(application, siteKey)
+        } catch(e: RecaptchaException) {
+            promise.reject(e)
         }
-        .onSuccess { client ->
-          recaptchaClient = client
-          promise.resolve(null)
-        }
-        .onFailure { exception -> promise.reject(exception) }
     }
   }
 

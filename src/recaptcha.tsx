@@ -24,14 +24,8 @@ interface Args {
  * @param siteKey Your application's reCAPTCHA site key
  * @param timeout An optional timeout value in milliseconds
  */
-export function initClient(siteKey: string, timeout?: number): Promise<string> {
-  let args: Args = {};
-
-  if (timeout) {
-    args.timeout = timeout;
-  }
-
-  return RecaptchaEnterpriseReactNative.initClient(siteKey, args);
+export function initClient(siteKey: string): Promise<string> {
+  return RecaptchaEnterpriseReactNative.initClient(siteKey);
 }
 
 /**

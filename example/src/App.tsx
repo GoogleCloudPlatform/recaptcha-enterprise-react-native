@@ -37,7 +37,7 @@ export default function App() {
     <View style={styles.container}>
       <Button
         onPress={() =>
-          initClient(siteKey ?? 'SITEKEY', 10000)
+          initClient(siteKey ?? 'SITEKEY')
             .then(() => {
               setInitResult('ok');
             })

@@ -17,7 +17,6 @@
 @interface RCT_EXTERN_MODULE(RecaptchaEnterpriseReactNative, NSObject)
 
 RCT_EXTERN_METHOD(initClient: (NSString)siteKey 
-                 arguments: (NSDictionary *)args
                  withResolver: (RCTPromiseResolveBlock)resolve 
                  withRejecter: (RCTPromiseRejectBlock)reject)
 

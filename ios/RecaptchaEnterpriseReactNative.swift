@@ -28,10 +28,9 @@ class RecaptchaEnterpriseReactNative: NSObject {
     }
   }
 
-  @objc(initClient:arguments:withResolver:withRejecter:)
+  @objc(initClient:withResolver:withRejecter:)
   func initClient(
     siteKey: String,
-    arguments: NSDictionary,
     resolve: @escaping RCTPromiseResolveBlock,
     reject: @escaping RCTPromiseRejectBlock
   ) {
@@ -47,13 +46,8 @@ class RecaptchaEnterpriseReactNative: NSObject {
         reject(String(error.errorCode), error.errorMessage, nil)
       }
     }
-
-    if let args = arguments as? [String: Any], let timeout = args["timeout"] as? Double {
-      Recaptcha.getClient(
-        withSiteKey: siteKey, withTimeout: timeout, completion: getClientClosure)
-    } else {
-      Recaptcha.getClient(withSiteKey: siteKey, completion: getClientClosure)
-    }
+    
+    Recaptcha.fetchClient(withSiteKey: siteKey, completion: getClientClosure)
   }
 
   @objc(execute:arguments:withResolver:withRejecter:)

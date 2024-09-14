@@ -48,7 +48,7 @@ const [token, setToken] = React.useState<string | undefined>();
 Init:
 
 ```
-initClient(siteKey ?? 'SITEKEY', 10000)
+initClient(siteKey ?? 'SITEKEY')
   .then(setInitResult('ok'))
   .catch((error) => {
     setInitResult(error.toString());
@@ -69,13 +69,13 @@ execute(RecaptchaAction.LOGIN(), 10000)
 
 ## Common Problems:
 
-*   `error: include of non-modular header inside framework module 'RecaptchaEnterprise.Recaptcha'`
+- `error: include of non-modular header inside framework module 'RecaptchaEnterprise.Recaptcha'`
 
 Use static linking in pods, for instance: `USE_FRAMEWORKS=static pod install` or
 `use_frameworks! :linkage => :static` in your Podfile.
 
-*   `fatal error: 'FlipperKit/FlipperClient.h' file not found #import
-    <FlipperKit/FlipperClient.h>`
+- `fatal error: 'FlipperKit/FlipperClient.h' file not found #import
+<FlipperKit/FlipperClient.h>`
 
 Flipper is not yet compatible with static linkage, so disable flipper in your
 Podfile: `flipper_config = FlipperConfiguration.disabled`
