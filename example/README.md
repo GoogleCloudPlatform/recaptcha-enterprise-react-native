@@ -35,7 +35,7 @@ Podfile:
 
 ## Basic usage
 
-```
+```typescript
 import { execute, initClient, RecaptchaAction, } from '@google-cloud/recaptcha-enterprise-react-native';
 
 const [initResult, setInitResult] = React.useState<string | undefined>();
@@ -47,7 +47,7 @@ const [token, setToken] = React.useState<string | undefined>();
 
 Init:
 
-```
+```typescript
 initClient(siteKey ?? 'SITEKEY', 10000)
   .then(setInitResult('ok'))
   .catch((error) => {
@@ -57,7 +57,7 @@ initClient(siteKey ?? 'SITEKEY', 10000)
 
 Execute:
 
-```
+```typescript
 execute(RecaptchaAction.LOGIN(), 10000)
   .then((token) => {
     setExecuteResult(token);
