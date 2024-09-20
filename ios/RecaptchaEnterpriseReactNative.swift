@@ -28,6 +28,29 @@ class RecaptchaEnterpriseReactNative: NSObject {
     }
   }
 
+  @objc(fetchClient:withResolver:withRejecter:)
+  func fetchClient(
+    siteKey: String,
+    resolve: @escaping RCTPromiseResolveBlock,
+    reject: @escaping RCTPromiseRejectBlock
+  ) {
+    let getClientClosure: (RecaptchaClient?, Error?) -> Void = { recaptchaClient, error in
+      if let recaptchaClient = recaptchaClient {
+        self.recaptchaClient = recaptchaClient
+        resolve(nil)
+      } else if let error = error {
+        guard let error = error as? RecaptchaError else {
+          reject("RN_CAST_ERROR", "Not a RecaptchaError", nil)
+          return
+        }
+        reject(String(error.errorCode), error.errorMessage, nil)
+      }
+    }
+
+    Recaptcha.fetchClient(
+      withSiteKey: siteKey, completion: getClientClosure)
+  }
+
   @objc(initClient:arguments:withResolver:withRejecter:)
   func initClient(
     siteKey: String,

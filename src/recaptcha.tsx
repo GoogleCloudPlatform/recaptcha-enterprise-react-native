@@ -14,13 +14,33 @@
 
 import { RecaptchaEnterpriseReactNative } from './index';
 import type { RecaptchaAction } from './recaptcha_action';
+import { type RecaptchaClient, RecaptchaClientImpl } from './recaptcha_client';
 
 interface Args {
   [key: string]: number | string;
 }
 
 /**
- * Initialize a reCAPTCHA cliuent
+ * Interface to interact with reCAPTCHA.
+ */
+export class Recaptcha {
+  private constructor() { }
+
+  /**
+   * Fetches a reCAPTCHA client immediately
+   * @param siteKey Your application's reCAPTCHA site key
+   */
+  static fetchClient(
+    siteKey: string
+  ): RecaptchaClient {
+    RecaptchaEnterpriseReactNative.fetchClient(siteKey)
+    return new RecaptchaClientImpl()
+  }
+}
+
+/**
+ * Initialize a reCAPTCHA client
+ * @deprecated Use {@link Recaptcha.fetchClient} instead
  * @param siteKey Your application's reCAPTCHA site key
  * @param timeout An optional timeout value in milliseconds
  */
@@ -36,6 +56,7 @@ export function initClient(siteKey: string, timeout?: number): Promise<string> {
 
 /**
  * Execute reCAPTCHA and retrieve a token
+ * @deprecated Use {@link RecaptchaClient.execute} instead
  * @param action An action to describe what the user is doing such as "login"
  * @param timeout An optional timeout value in milliseconds
  */

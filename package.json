@@ -166,6 +166,7 @@
     ]
   },
   "dependencies": {
+    "@google-cloud/recaptcha-enterprise-react-native": "18.6.0",
     "@yarnpkg/plugin-interactive-tools": "^4.0.0"
   }
 }
