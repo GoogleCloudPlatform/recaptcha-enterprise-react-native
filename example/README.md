@@ -80,22 +80,29 @@ Use static linking in pods, for instance: `USE_FRAMEWORKS=static pod install` or
 Flipper is not yet compatible with static linkage, so disable flipper in your
 Podfile: `flipper_config = FlipperConfiguration.disabled`
 
-## Example App
+## Installing
 
-Install prerequisites:
+From the repository root, install prerequisites running the command:
 
+```bash
 npx yarn install && cd example && npx yarn install && cd ios && pod install
+```
 
 ### Run sample app:
 
-cd example && npx react-native run-android
+```bash
+cd example && npm run start
+```
 
-cd example && npx react-native run-ios
+When the `Metro` server start either press `i` for iOS and `a` for Android.
 
 ### Running Integration Tests
 
+```bash
 brew tap wix/brew && brew install applesimutils
 
 cd example && npx detox build --configuration ios.sim.debug && npx detox test --configuration ios.sim.debug
 
 cd example && npx detox build --configuration android.emu.debug && npx detox test --configuration android.emu.debug
+```
+

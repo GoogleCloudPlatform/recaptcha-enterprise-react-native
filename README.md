@@ -81,29 +81,7 @@ execute(RecaptchaAction.LOGIN(), 10000)
 
 ## Example App
 
-Install prerequisites:
-
-```bash
-npx yarn install && cd example && npx yarn install && cd ios && pod install
-```
-
-### Run sample app:
-
-```bash
-cd example && npx react-native run-android
-
-cd example && npx react-native run-ios
-```
-
-### Running Integration Tests
-
-```bash
-brew tap wix/brew && brew install applesimutils
-
-cd example && npx detox build --configuration ios.sim.debug && npx detox test --configuration ios.sim.debug
-
-cd example && npx detox build --configuration android.emu.debug && npx detox test --configuration android.emu.debug
-```
+Follow guidance at [Example App](example/README.md).
 
 ## Common Problems:
 
