@@ -28,6 +28,35 @@ class RecaptchaEnterpriseReactNative: NSObject {
     }
   }
 
+  private func generateCallbackClosure(
+    _ resolve: @escaping RCTPromiseResolveBlock,
+    _ reject: @escaping RCTPromiseRejectBlock
+  ) -> (RecaptchaClient?, Error?) -> Void {
+    return {
+      recaptchaClient, error in
+        if let recaptchaClient = recaptchaClient {
+          self.recaptchaClient = recaptchaClient
+          resolve(nil)
+        } else if let error = error {
+          guard let error = error as? RecaptchaError else {
+            reject("RN_CAST_ERROR", "Not a RecaptchaError", nil)
+            return
+          }
+          reject(String(error.errorCode), error.errorMessage, nil)
+        }
+    }
+  }
+
+  @objc(fetchClient:withResolver:withRejecter:)
+  func fetchClient(
+    siteKey: String,
+    resolve: @escaping RCTPromiseResolveBlock,
+    reject: @escaping RCTPromiseRejectBlock
+  ) {
+    Recaptcha.fetchClient(
+      withSiteKey: siteKey, completion: generateCallbackClosure(resolve, reject))
+  }
+
   @objc(initClient:arguments:withResolver:withRejecter:)
   func initClient(
     siteKey: String,
@@ -35,24 +64,11 @@ class RecaptchaEnterpriseReactNative: NSObject {
     resolve: @escaping RCTPromiseResolveBlock,
     reject: @escaping RCTPromiseRejectBlock
   ) {
-    let getClientClosure: (RecaptchaClient?, Error?) -> Void = { recaptchaClient, error in
-      if let recaptchaClient = recaptchaClient {
-        self.recaptchaClient = recaptchaClient
-        resolve(nil)
-      } else if let error = error {
-        guard let error = error as? RecaptchaError else {
-          reject("RN_CAST_ERROR", "Not a RecaptchaError", nil)
-          return
-        }
-        reject(String(error.errorCode), error.errorMessage, nil)
-      }
-    }
-
     if let args = arguments as? [String: Any], let timeout = args["timeout"] as? Double {
       Recaptcha.getClient(
-        withSiteKey: siteKey, withTimeout: timeout, completion: getClientClosure)
+        withSiteKey: siteKey, withTimeout: timeout, completion: generateCallbackClosure(resolve, reject))
     } else {
-      Recaptcha.getClient(withSiteKey: siteKey, completion: getClientClosure)
+      Recaptcha.getClient(withSiteKey: siteKey, completion: generateCallbackClosure(resolve, reject))
     }
   }
 

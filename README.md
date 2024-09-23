@@ -18,7 +18,9 @@ and
 
 Add the package to your React Native project:
 
-`npx yarn add @google-cloud/recaptcha-enterprise-react-native`
+```bash
+npx yarn add @google-cloud/recaptcha-enterprise-react-native
+```
 
 If using VSCode install eslint:
 
@@ -26,7 +28,9 @@ If using VSCode install eslint:
 
 You may need to use an older JDK:
 
-`export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-19-latest/Contents/Home`
+```bash
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-19-latest/Contents/Home
+```
 
 ## Podfile
 
@@ -43,7 +47,7 @@ Podfile:
 
 ## Basic usage
 
-```
+```typescript
 import { execute, initClient, RecaptchaAction, } from '@google-cloud/recaptcha-enterprise-react-native';
 
 const [initResult, setInitResult] = React.useState<string | undefined>();
@@ -55,7 +59,7 @@ const [token, setToken] = React.useState<string | undefined>();
 
 Init:
 
-```
+```typescript
 initClient(siteKey ?? 'SITEKEY', 10000)
   .then(setInitResult('ok'))
   .catch((error) => {
@@ -65,7 +69,7 @@ initClient(siteKey ?? 'SITEKEY', 10000)
 
 Execute:
 
-```
+```typescript
 execute(RecaptchaAction.LOGIN(), 10000)
   .then((token) => {
     setExecuteResult(token);
@@ -75,35 +79,27 @@ execute(RecaptchaAction.LOGIN(), 10000)
   })
 ```
 
+## Example App
+
+Follow guidance at [Example App](example/README.md).
+
 ## Common Problems:
 
-*   `error: include of non-modular header inside framework module 'RecaptchaEnterprise.Recaptcha'`
+### `error: include of non-modular header inside framework module 'RecaptchaEnterprise.Recaptcha'`
 
 Use static linking in pods, for instance: `USE_FRAMEWORKS=static pod install` or
 `use_frameworks! :linkage => :static` in your Podfile.
 
-*   `fatal error: 'FlipperKit/FlipperClient.h' file not found #import
+### `fatal error: 'FlipperKit/FlipperClient.h' file not found #import
     <FlipperKit/FlipperClient.h>`
 
 Flipper is not yet compatible with static linkage, so disable flipper in your
 Podfile: `flipper_config = FlipperConfiguration.disabled`
 
-## Example App
+### SDK Location Not found
 
-Install prerequisites:
+Run the following command in the terminal:
 
-npx yarn install && cd example && npx yarn install && cd ios && pod install
-
-### Run sample app:
-
-cd example && npx react-native run-android
-
-cd example && npx react-native run-ios
-
-### Running Integration Tests
-
-brew tap wix/brew && brew install applesimutils
-
-cd example && npx detox build --configuration ios.sim.debug && npx detox test --configuration ios.sim.debug
-
-cd example && npx detox build --configuration android.emu.debug && npx detox test --configuration android.emu.debug
+```bash
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+```

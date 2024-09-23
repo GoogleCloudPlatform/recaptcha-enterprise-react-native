@@ -49,6 +49,13 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
   }
 
   @ReactMethod
+  fun fetchClient(siteKey: String) {
+    GlobalScope.launch {
+      recaptchaClient = Recaptcha.fetchClient(application, siteKey)
+    }
+  }
+
+  @ReactMethod
   fun initClient(siteKey: String, arguments: ReadableMap, promise: Promise) {
     GlobalScope.launch {
       let {

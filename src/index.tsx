@@ -13,8 +13,9 @@
 // limitations under the License.
 
 import { NativeModules, Platform } from 'react-native';
-export { execute, initClient } from './recaptcha';
+export { execute, initClient, Recaptcha } from './recaptcha';
 export { RecaptchaAction } from './recaptcha_action';
+export type { RecaptchaClient } from './recaptcha_client';
 
 const LINKING_ERROR =
   `The package '@google-cloud/recaptcha-enterprise-react-native' doesn't seem to be linked. Make sure: \n\n` +

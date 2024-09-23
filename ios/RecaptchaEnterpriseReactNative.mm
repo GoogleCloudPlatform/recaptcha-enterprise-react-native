@@ -21,6 +21,10 @@ RCT_EXTERN_METHOD(initClient: (NSString)siteKey
                  withResolver: (RCTPromiseResolveBlock)resolve 
                  withRejecter: (RCTPromiseRejectBlock)reject)
 
+RCT_EXTERN_METHOD(fetchClient: (NSString)siteKey 
+                 withResolver: (RCTPromiseResolveBlock)resolve 
+                 withRejecter: (RCTPromiseRejectBlock)reject)
+
 RCT_EXTERN_METHOD(execute: (NSString)action 
                  arguments: (NSDictionary *)args 
                  withResolver: (RCTPromiseResolveBlock)resolve 

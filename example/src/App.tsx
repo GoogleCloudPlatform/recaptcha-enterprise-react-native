@@ -19,10 +19,14 @@ import { Button, Platform, StyleSheet, Text, View } from 'react-native';
 import {
   execute,
   initClient,
+  Recaptcha,
   RecaptchaAction,
+  type RecaptchaClient,
 } from '@google-cloud/recaptcha-enterprise-react-native';
 
 export default function App() {
+  const [recaptchaClient, setRecaptchaClient] =
+    React.useState<RecaptchaClient>();
   const [initResult, setInitResult] = React.useState<string>('Not Initialized');
   const [executeResult, setExecuteResult] = React.useState<
     string | undefined
@@ -35,6 +39,45 @@ export default function App() {
 
   return (
     <View style={styles.container}>
+      <Button
+        onPress={() => {
+          try {
+            setRecaptchaClient(Recaptcha.fetchClient(siteKey ?? 'SITEKEY'));
+            setInitResult('ok');
+          } catch (error: any) {
+            setInitResult(error.toString());
+          }
+        }}
+        title="Fetch Client"
+        testID="fetchClientButtonId"
+      />
+      <Text>Fetch Client Result: </Text>
+      <Text testID="fetchClientResultId">{initResult}</Text>
+
+      <Button
+        onPress={() => {
+          if (recaptchaClient) {
+            recaptchaClient
+              .execute(RecaptchaAction.LOGIN(), 10000)
+              .then((newToken) => {
+                setExecuteResult(newToken.startsWith('03') ? 'ok' : 'error');
+                setToken(newToken);
+              })
+              .catch((error) => {
+                setExecuteResult(error.toString());
+              });
+          } else {
+            setExecuteResult('Recaptcha Client is undefined');
+          }
+        }}
+        title="Execute"
+        testID="clientExecuteButtonId"
+      />
+      <Text>Execute Result:</Text>
+      <Text testID="clientExecuteResultId">{executeResult}</Text>
+
+      <Text>Deprecated methods</Text>
+
       <Button
         onPress={() =>
           initClient(siteKey ?? 'SITEKEY', 10000)
