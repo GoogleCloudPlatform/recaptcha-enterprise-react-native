@@ -1,3 +1,6 @@
+## 18.6.0
+Upgrade iOS SDK to 18.6.0 and Android SDK to 18.6.1
+
 ## 18.5.1
 Upgrade iOS and Android SDK to 18.5.1
 
