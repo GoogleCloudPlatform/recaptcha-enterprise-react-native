@@ -12,17 +12,11 @@ export interface RecaptchaClient {
      * @param action An action to describe what the user is doing such as "login"
      * @param timeout An optional timeout value in milliseconds
      */
-    execute(
-        action: RecaptchaAction,
-        timeout?: number
-    ): Promise<string>
+    execute(action: RecaptchaAction, timeout?: number): Promise<string>;
 }
 
 export class RecaptchaClientImpl implements RecaptchaClient {
-    execute(
-        action: RecaptchaAction,
-        timeout?: number
-    ): Promise<string> {
+    execute(action: RecaptchaAction, timeout?: number): Promise<string> {
         let args: Args = {};
 
         if (timeout) {

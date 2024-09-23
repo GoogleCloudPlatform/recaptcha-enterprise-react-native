@@ -30,11 +30,9 @@ export class Recaptcha {
    * Fetches a reCAPTCHA client immediately
    * @param siteKey Your application's reCAPTCHA site key
    */
-  static fetchClient(
-    siteKey: string
-  ): RecaptchaClient {
-    RecaptchaEnterpriseReactNative.fetchClient(siteKey)
-    return new RecaptchaClientImpl()
+  static fetchClient(siteKey: string): RecaptchaClient {
+    RecaptchaEnterpriseReactNative.fetchClient(siteKey);
+    return new RecaptchaClientImpl();
   }
 }
 

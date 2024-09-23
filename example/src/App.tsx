@@ -21,11 +21,12 @@ import {
   initClient,
   Recaptcha,
   RecaptchaAction,
-  type RecaptchaClient
+  type RecaptchaClient,
 } from '@google-cloud/recaptcha-enterprise-react-native';
 
 export default function App() {
-  const [recaptchaClient, setRecaptchaClient] = React.useState<RecaptchaClient>();
+  const [recaptchaClient, setRecaptchaClient] =
+    React.useState<RecaptchaClient>();
   const [initResult, setInitResult] = React.useState<string>('Not Initialized');
   const [executeResult, setExecuteResult] = React.useState<
     string | undefined
@@ -46,8 +47,7 @@ export default function App() {
           } catch (error: any) {
             setInitResult(error.toString());
           }
-        }
-        }
+        }}
         title="Fetch Client"
         testID="fetchClientButtonId"
       />
@@ -57,16 +57,17 @@ export default function App() {
       <Button
         onPress={() => {
           if (recaptchaClient) {
-            recaptchaClient.execute(RecaptchaAction.LOGIN(), 10000)
+            recaptchaClient
+              .execute(RecaptchaAction.LOGIN(), 10000)
               .then((newToken) => {
                 setExecuteResult(newToken.startsWith('03') ? 'ok' : 'error');
                 setToken(newToken);
               })
               .catch((error) => {
                 setExecuteResult(error.toString());
-              })
+              });
           } else {
-            setExecuteResult("Recaptcha Client is undefined");
+            setExecuteResult('Recaptcha Client is undefined');
           }
         }}
         title="Execute"

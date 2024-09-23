@@ -1,4 +1,3 @@
-
 /**
  * Metro configuration
  * https://reactnative.dev/docs/metro
