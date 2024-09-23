@@ -15,5 +15,5 @@ runs:
       shell: bash
 
     - name: Install yarn for example
-      run: cd example && yarn install
+      run: cd example && yarn install && cd ios && pod install && cd ..
       shell: bash
