@@ -27,10 +27,10 @@ export const RecaptchaEnterpriseReactNative =
   NativeModules.RecaptchaEnterpriseReactNative
     ? NativeModules.RecaptchaEnterpriseReactNative
     : new Proxy(
-      {},
-      {
-        get() {
-          throw new Error(LINKING_ERROR);
-        },
-      }
-    );
+        {},
+        {
+          get() {
+            throw new Error(LINKING_ERROR);
+          },
+        }
+      );

@@ -24,7 +24,7 @@ interface Args {
  * Interface to interact with reCAPTCHA.
  */
 export class Recaptcha {
-  private constructor() { }
+  private constructor() {}
 
   /**
    * Fetches a reCAPTCHA client immediately
