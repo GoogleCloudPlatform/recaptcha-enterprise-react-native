@@ -34,6 +34,15 @@ export class Recaptcha {
     RecaptchaEnterpriseReactNative.fetchClient(siteKey);
     return new RecaptchaClientImpl();
   }
+
+  /**
+   * Execute reCAPTCHA and retrieve a token
+   * @param action An action to describe what the user is doing such as "login"
+   * @param timeout An optional timeout value in milliseconds
+   */
+  static execute(action: RecaptchaAction, timeout?: number): Promise<string> {
+    return RecaptchaEnterpriseReactNative.execute(action.action, { timeout });
+  }
 }
 
 /**
