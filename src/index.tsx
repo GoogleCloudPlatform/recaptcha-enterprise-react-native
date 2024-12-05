@@ -15,4 +15,3 @@
 export { execute, initClient, Recaptcha } from './recaptcha';
 export { RecaptchaAction } from './recaptcha_action';
 export type { RecaptchaClient } from './recaptcha_client';
-
