@@ -24,15 +24,17 @@ interface Args {
  * Interface to interact with reCAPTCHA.
  */
 export class Recaptcha {
-  private constructor() {}
+  private constructor() { }
 
   /**
    * Fetches a reCAPTCHA client immediately
    * @param siteKey Your application's reCAPTCHA site key
    */
-  static fetchClient(siteKey: string): RecaptchaClient {
-    RecaptchaEnterpriseReactNative.fetchClient(siteKey);
-    return new RecaptchaClientImpl();
+  static fetchClient(siteKey: string): Promise<RecaptchaClient> {
+    return RecaptchaEnterpriseReactNative.fetchClient(siteKey)
+      .then(() => {
+        return new RecaptchaClientImpl();
+      });
   }
 }
 
