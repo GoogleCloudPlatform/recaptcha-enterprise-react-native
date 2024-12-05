@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { RecaptchaEnterpriseReactNative } from './index';
+import { RecaptchaEnterpriseReactNative } from './recaptcha_native';
 import type { RecaptchaAction } from './recaptcha_action';
 import { type RecaptchaClient, RecaptchaClientImpl } from './recaptcha_client';
 
