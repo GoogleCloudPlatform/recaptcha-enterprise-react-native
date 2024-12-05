@@ -74,7 +74,7 @@ const client = await Recaptcha.fetchClient(SITE_KEY);
 ```
 
 > [!NOTE]
-> You must use the reCAPTCHA client only once during the lifetime of your app. 
+> You must initialize the reCAPTCHA client only once during the lifetime of your app. 
 
 ### 3. Fetch Token
 
