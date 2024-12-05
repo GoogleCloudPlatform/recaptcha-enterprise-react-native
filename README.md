@@ -32,52 +32,63 @@ You may need to use an older JDK:
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-19-latest/Contents/Home
 ```
 
-## Podfile
+### Podfile
 
 Similar to
 [Firebase](https://rnfirebase.io/#altering-cocoapods-to-use-frameworks), the
 library requires frameworks and static linkage:
 
-`use_frameworks! :linkage => :static`
+```
+use_frameworks! :linkage => :static
+```
 
 And flipper is not compatible with static linkage so disable flipper in the
 Podfile:
 
-`flipper_config = FlipperConfiguration.disabled`
-
-## Basic usage
-
-```typescript
-import { execute, initClient, RecaptchaAction, } from '@google-cloud/recaptcha-enterprise-react-native';
-
-const [initResult, setInitResult] = React.useState<string | undefined>();
-const [executeResult, setExecuteResult] = React.useState<
-  string | undefined
->();
-const [token, setToken] = React.useState<string | undefined>();
+```
+flipper_config = FlipperConfiguration.disabled
 ```
 
-Init:
+## Basic Usage
+
+This section shows how to integrate with reCAPTCHA SDK.
+
+### 1. Import Recaptcha
+
+Use the following imports to access the APIs provided by the SDK.
 
 ```typescript
-initClient(siteKey ?? 'SITEKEY', 10000)
-  .then(setInitResult('ok'))
-  .catch((error) => {
-    setInitResult(error.toString());
-  })
+import {
+  Recaptcha,
+  RecaptchaAction,
+  type RecaptchaClient,
+} from '@google-cloud/recaptcha-enterprise-react-native';
 ```
 
-Execute:
+### 2. Initialize the client
+
+Instantiate a client by using the reCAPTCHA key (KEY_ID) that you created for your Android/iOS app.
 
 ```typescript
-execute(RecaptchaAction.LOGIN(), 10000)
-  .then((token) => {
-    setExecuteResult(token);
-  })
-  .catch((error) => {
-    setExecuteResult(error.toString());
-  })
+const client = await Recaptcha.fetchClient(SITE_KEY);
 ```
+
+> [!NOTE]
+> You must use the reCAPTCHA client only once during the lifetime of your app. 
+
+### 3. Fetch Token
+
+For each action of your app that is protected using reCAPTCHA, call the execute method passing a 
+`RecaptchaAction`. reCAPTCHA provides a built-in set of actions and if necessary you can create 
+custom actions.
+
+The following code snippet shows how to use execute to protect a `LOGIN` action.
+
+```typescript
+const token = await client.execute(RecaptchaAction.LOGIN());
+```
+
+In case a custom action use `RecaptchaAction.custom('ACTION')`;
 
 ## Example App
 
@@ -103,3 +114,14 @@ Run the following command in the terminal:
 ```bash
 export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
 ```
+
+###  Unsupported class file major version 67
+
+This happens when a unsupported Java version is used. Run
+
+```bash
+npx react-native doctor
+```
+
+To discover the version that's being used and the supported ones. Change the
+version of Java to a supported one and try again.

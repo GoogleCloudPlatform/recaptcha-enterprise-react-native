@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { RecaptchaEnterpriseReactNative } from './index';
+import { RecaptchaEnterpriseReactNative } from './recaptcha_native';
 import type { RecaptchaAction } from './recaptcha_action';
 import { type RecaptchaClient, RecaptchaClientImpl } from './recaptcha_client';
 
@@ -24,15 +24,17 @@ interface Args {
  * Interface to interact with reCAPTCHA.
  */
 export class Recaptcha {
-  private constructor() {}
+  private constructor() { }
 
   /**
    * Fetches a reCAPTCHA client immediately
    * @param siteKey Your application's reCAPTCHA site key
    */
-  static fetchClient(siteKey: string): RecaptchaClient {
-    RecaptchaEnterpriseReactNative.fetchClient(siteKey);
-    return new RecaptchaClientImpl();
+  static fetchClient(siteKey: string): Promise<RecaptchaClient> {
+    return RecaptchaEnterpriseReactNative.fetchClient(siteKey)
+      .then(() => {
+        return new RecaptchaClientImpl();
+      });
   }
 }
 

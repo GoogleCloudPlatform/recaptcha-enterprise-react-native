@@ -1,4 +1,4 @@
-import { RecaptchaEnterpriseReactNative } from './index';
+import { RecaptchaEnterpriseReactNative } from './recaptcha_native';
 import type { RecaptchaAction } from './recaptcha_action';
 
 interface Args {
