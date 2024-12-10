@@ -40,9 +40,10 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Button
-        onPress={() => {
+        onPress={async () => {
           try {
-            setRecaptchaClient(Recaptcha.fetchClient(siteKey ?? 'SITEKEY'));
+            const client = await Recaptcha.fetchClient(siteKey ?? 'SITEKEY');
+            setRecaptchaClient(client);
             setInitResult('ok');
           } catch (error: any) {
             setInitResult(error.toString());
