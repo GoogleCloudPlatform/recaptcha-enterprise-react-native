@@ -42,7 +42,7 @@ class RecaptchaEnterpriseReactNative: NSObject {
             reject("RN_CAST_ERROR", "Not a RecaptchaError", nil)
             return
           }
-          reject(String(error.errorCode), error.errorMessage, nil)
+          reject(String(error.errorCode.rawValue), error.errorMessage, nil)
         }
     }
   }
@@ -93,7 +93,7 @@ class RecaptchaEnterpriseReactNative: NSObject {
           reject("RN_CAST_ERROR", "Not a RecaptchaError", nil)
           return
         }
-        reject(String(error.errorCode), error.errorMessage, nil)
+        reject(String(error.errorCode.rawValue), error.errorMessage, nil)
       }
     }
 

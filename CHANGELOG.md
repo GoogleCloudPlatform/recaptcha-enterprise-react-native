@@ -1,3 +1,7 @@
+## 18.7.0-beta01
+
+* Upgrade iOS and Android SDK to 18.7.0-beta01
+
 ## 18.6.1
 
 * Update documentation for the new API.
