@@ -25,6 +25,7 @@ import com.facebook.react.bridge.ReadableMap
 import com.google.android.recaptcha.Recaptcha
 import com.google.android.recaptcha.RecaptchaAction
 import com.google.android.recaptcha.RecaptchaClient
+import com.google.android.recaptcha.RecaptchaException
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -76,8 +77,14 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
           recaptchaClient = client
           promise.resolve(null)
         }
-        .onFailure { exception -> promise.reject(exception) }
-    }
+        .onFailure { exception -> {
+              if (exception is RecaptchaException) {
+                promise.reject(exception.errorCode.toString(), exception.errorMessage, exception) 
+              } else {
+                promise.reject(exception) 
+              }
+        }}  
+     }
   }
 
   @ReactMethod
@@ -101,7 +108,13 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
           }
         }
         .onSuccess { token -> promise.resolve(token) }
-        .onFailure { exception -> promise.reject(exception) }
+        .onFailure { exception -> {
+              if (exception is RecaptchaException) {
+                promise.reject(exception.errorCode.toString(), exception.errorMessage, exception) 
+              } else {
+                promise.reject(exception) 
+              }
+        }}  
     }
   }
 
