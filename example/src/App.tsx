@@ -15,7 +15,14 @@
 import * as React from 'react';
 import Config from 'react-native-config';
 
-import { Button, Platform, StyleSheet, Text, View } from 'react-native';
+import {
+  Button,
+  Platform,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
 import {
   execute,
   initClient,
@@ -28,6 +35,9 @@ export default function App() {
   const [recaptchaClient, setRecaptchaClient] =
     React.useState<RecaptchaClient>();
   const [initResult, setInitResult] = React.useState<string>('Not Initialized');
+  const [action, setAction] = React.useState<string>(
+    RecaptchaAction.LOGIN().action
+  );
   const [executeResult, setExecuteResult] = React.useState<
     string | undefined
   >();
@@ -46,7 +56,7 @@ export default function App() {
             setRecaptchaClient(client);
             setInitResult('ok');
           } catch (error: any) {
-            setInitResult(error.toString());
+            setInitResult(`${error.code} ${error.message.substring(0, 15)}`);
           }
         }}
         title="Fetch Client"
@@ -55,17 +65,22 @@ export default function App() {
       <Text>Fetch Client Result: </Text>
       <Text testID="fetchClientResultId">{initResult}</Text>
 
+      <Text>Action name:</Text>
+      <TextInput testID="actionId" onChangeText={setAction} value={action} />
+
       <Button
         onPress={() => {
           if (recaptchaClient) {
             recaptchaClient
-              .execute(RecaptchaAction.LOGIN(), 10000)
+              .execute(new RecaptchaAction(action), 10000)
               .then((newToken) => {
                 setExecuteResult(newToken.startsWith('03') ? 'ok' : 'error');
                 setToken(newToken);
               })
               .catch((error) => {
-                setExecuteResult(error.toString());
+                setExecuteResult(
+                  `${error.code} ${error.message.substring(0, 15)}`
+                );
               });
           } else {
             setExecuteResult('Recaptcha Client is undefined');
@@ -86,7 +101,7 @@ export default function App() {
               setInitResult('ok');
             })
             .catch((error) => {
-              setInitResult(error.toString());
+              setInitResult(`${error.code} ${error.message.substring(0, 15)}`);
             })
         }
         title="Init"
@@ -97,13 +112,15 @@ export default function App() {
 
       <Button
         onPress={() =>
-          execute(RecaptchaAction.LOGIN(), 10000)
+          execute(new RecaptchaAction(action), 10000)
             .then((newToken) => {
               setExecuteResult(newToken.startsWith('03') ? 'ok' : 'error');
               setToken(newToken);
             })
             .catch((error) => {
-              setExecuteResult(error.toString());
+              setExecuteResult(
+                `${error.code} ${error.message.substring(0, 15)}`
+              );
             })
         }
         title="Execute"

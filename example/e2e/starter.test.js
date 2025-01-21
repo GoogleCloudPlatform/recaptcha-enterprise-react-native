@@ -7,14 +7,13 @@ describe('Example', () => {
 
   beforeEach(async () => {
     await device.reloadReactNative();
+    await element(by.id('actionId')).replaceText('login');
   });
+
+  /* getClient (old) API */
 
   it('should have init button', async () => {
     await expect(element(by.id('initButtonId'))).toBeVisible();
-  });
-
-  it('should have fetch client button', async () => {
-    await expect(element(by.id('fetchClientButtonId'))).toBeVisible();
   });
 
   it('should show ok after initialization', async () => {
@@ -23,14 +22,6 @@ describe('Example', () => {
       .toHaveText('ok')
       .withTimeout(10000);
     await expect(element(by.id('initResultId'))).toHaveText('ok');
-  });
-
-  it('should show ok after fetching a client', async () => {
-    await element(by.id('fetchClientButtonId')).tap();
-    await waitFor(element(by.id('fetchClientResultId')))
-      .toHaveText('ok')
-      .withTimeout(10000);
-    await expect(element(by.id('fetchClientResultId'))).toHaveText('ok');
   });
 
   it('should show token after execute', async () => {
@@ -42,6 +33,42 @@ describe('Example', () => {
     await expect(element(by.id('executeResultId'))).toHaveText('ok');
   });
 
+  it('should show error execute with bad action', async () => {
+    await element(by.id('initButtonId')).tap();
+    await waitFor(element(by.id('initResultId')))
+      .toHaveText('ok')
+      .withTimeout(10000);
+    await element(by.id('actionId')).replaceText('asdf $%');
+    await element(by.id('executeButtonId')).tap();
+    const errorMessage = 'INVALID_ACTION Invalid action ';
+    await waitFor(element(by.id('executeResultId')))
+      .toHaveText(errorMessage)
+      .withTimeout(10000);
+    await expect(element(by.id('executeResultId'))).toHaveText(errorMessage);
+  });
+
+  it('should show error if execute without init or fetch client', async () => {
+    await element(by.id('executeButtonId')).tap();
+    const errorMessage = 'RN_EXECUTE_FAILED Initialize clie';
+    await waitFor(element(by.id('executeResultId')))
+      .toHaveText(errorMessage)
+      .withTimeout(10000);
+    await expect(element(by.id('executeResultId'))).toHaveText(errorMessage);
+  });
+
+  /* fetchClient (new) API */
+  it('should have fetch client button', async () => {
+    await expect(element(by.id('fetchClientButtonId'))).toBeVisible();
+  });
+
+  it('should show ok after fetching a client', async () => {
+    await element(by.id('fetchClientButtonId')).tap();
+    await waitFor(element(by.id('fetchClientResultId')))
+      .toHaveText('ok')
+      .withTimeout(10000);
+    await expect(element(by.id('fetchClientResultId'))).toHaveText('ok');
+  });
+
   it('should show token after fetch client and execute', async () => {
     await element(by.id('fetchClientButtonId')).tap();
     await element(by.id('clientExecuteButtonId')).tap();
@@ -51,13 +78,16 @@ describe('Example', () => {
     await expect(element(by.id('clientExecuteResultId'))).toHaveText('ok');
   });
 
-  it('should show error if execute without init or fetch client', async () => {
-    await element(by.id('executeButtonId')).tap();
-    await waitFor(element(by.id('executeResultId')))
-      .toHaveText('Error: Initialize client first')
+  it('should show error execute with bad action after fetch client', async () => {
+    await element(by.id('fetchClientButtonId')).tap();
+    await element(by.id('actionId')).replaceText('asdf $%');
+    await element(by.id('clientExecuteButtonId')).tap();
+    const errorMessage = 'INVALID_ACTION Invalid action ';
+    await waitFor(element(by.id('clientExecuteResultId')))
+      .toHaveText(errorMessage)
       .withTimeout(10000);
-    await expect(element(by.id('executeResultId'))).toHaveText(
-      'Error: Initialize client first'
+    await expect(element(by.id('clientExecuteResultId'))).toHaveText(
+      errorMessage
     );
   });
 

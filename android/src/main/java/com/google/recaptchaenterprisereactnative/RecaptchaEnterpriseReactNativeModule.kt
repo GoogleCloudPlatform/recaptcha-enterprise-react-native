@@ -30,95 +30,95 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext) :
-  ReactContextBaseJavaModule(reactContext) {
+    ReactContextBaseJavaModule(reactContext) {
 
-  private lateinit var recaptchaClient: RecaptchaClient
-  private val application: Application = reactContext.getApplicationContext() as Application
+    private lateinit var recaptchaClient: RecaptchaClient
+    private val application: Application = reactContext.getApplicationContext() as Application
 
-  override fun getName(): String {
-    return NAME
-  }
-
-  fun mapAction(actionStr: String): RecaptchaAction {
-    if (actionStr.equals("login", ignoreCase = false)) {
-      return RecaptchaAction.LOGIN
-    } else if (actionStr.equals("signup", ignoreCase = false)) {
-      return RecaptchaAction.SIGNUP
-    } else {
-      return RecaptchaAction.custom(actionStr)
+    override fun getName(): String {
+        return NAME
     }
-  }
 
-  @ReactMethod
-  fun fetchClient(siteKey: String, promise: Promise) {
-    GlobalScope.launch {
-      try {
-          recaptchaClient = Recaptcha.fetchClient(application, siteKey)
-          promise.resolve(null)
-      }catch (exception: Exception){
-          promise.reject(exception)
-      }
-    }
-  }
-
-  @ReactMethod
-  fun initClient(siteKey: String, arguments: ReadableMap, promise: Promise) {
-    GlobalScope.launch {
-      let {
-          if (arguments.hasKey("timeout")) {
-            // JS+ReadableMap have no support for long
-            val timeout = arguments.getDouble("timeout").toLong()
-            Recaptcha.getClient(application, siteKey, timeout)
-          } else {
-            Recaptcha.getClient(application, siteKey)
-          }
+    fun mapAction(actionStr: String): RecaptchaAction {
+        if (actionStr.equals("login", ignoreCase = false)) {
+            return RecaptchaAction.LOGIN
+        } else if (actionStr.equals("signup", ignoreCase = false)) {
+            return RecaptchaAction.SIGNUP
+        } else {
+            return RecaptchaAction.custom(actionStr)
         }
-        .onSuccess { client ->
-          recaptchaClient = client
-          promise.resolve(null)
-        }
-        .onFailure { exception -> {
-              if (exception is RecaptchaException) {
-                promise.reject(exception.errorCode.toString(), exception.errorMessage, exception) 
-              } else {
-                promise.reject(exception) 
-              }
-        }}  
-     }
-  }
-
-  @ReactMethod
-  fun execute(actionStr: String, arguments: ReadableMap, promise: Promise) {
-    if (!this::recaptchaClient.isInitialized) {
-      promise.reject("RN_EXECUTE_FAILED", "Initialize client first", null)
-      return
     }
 
-    val action = mapAction(actionStr)
-
-    GlobalScope.launch {
-      recaptchaClient
-        .let {
-          if (arguments.hasKey("timeout")) {
-            // JS+ReadableMap have no support for long
-            val timeout = arguments.getDouble("timeout").toLong()
-            it.execute(action, timeout)
-          } else {
-            it.execute(action)
-          }
+    @ReactMethod
+    fun fetchClient(siteKey: String, promise: Promise) {
+        GlobalScope.launch {
+            try {
+                recaptchaClient = Recaptcha.fetchClient(application, siteKey)
+                promise.resolve(null)
+            } catch (exception: Exception) {
+                promise.reject(exception)
+            }
         }
-        .onSuccess { token -> promise.resolve(token) }
-        .onFailure { exception -> {
-              if (exception is RecaptchaException) {
-                promise.reject(exception.errorCode.toString(), exception.errorMessage, exception) 
-              } else {
-                promise.reject(exception) 
-              }
-        }}  
     }
-  }
 
-  companion object {
-    const val NAME = "RecaptchaEnterpriseReactNative"
-  }
+    @ReactMethod
+    fun initClient(siteKey: String, arguments: ReadableMap, promise: Promise) {
+        GlobalScope.launch {
+            let {
+                if (arguments.hasKey("timeout")) {
+                    // JS+ReadableMap have no support for long
+                    val timeout = arguments.getDouble("timeout").toLong()
+                    Recaptcha.getClient(application, siteKey, timeout)
+                } else {
+                    Recaptcha.getClient(application, siteKey)
+                }
+            }
+                .onSuccess { client ->
+                    recaptchaClient = client
+                    promise.resolve(null)
+                }
+                .onFailure { exception ->
+                    if (exception is RecaptchaException) { promise.reject(exception.errorCode.toString(), exception.errorMessage, exception) } else {
+                        promise.reject(exception)
+                    }
+                }
+        }
+    }
+
+    @ReactMethod
+    fun execute(actionStr: String, arguments: ReadableMap, promise: Promise) {
+        if (!this::recaptchaClient.isInitialized) {
+            promise.reject("RN_EXECUTE_FAILED", "Initialize client first", null)
+            return
+        }
+
+        val action = mapAction(actionStr)
+
+        GlobalScope.launch {
+            recaptchaClient
+                .let {
+                    if (arguments.hasKey("timeout")) {
+                        // JS+ReadableMap have no support for long
+                        val timeout = arguments.getDouble("timeout").toLong()
+                        it.execute(action, timeout)
+                    } else {
+                        it.execute(action)
+                    }
+                }
+                .onSuccess { token ->
+                    promise.resolve(token)
+                }
+                .onFailure { exception ->
+                    if (exception is RecaptchaException) {
+                        promise.reject(exception.errorCode.toString(), exception.errorMessage, exception)
+                    } else {
+                        promise.reject(exception)
+                    }
+                }
+        }
+    }
+
+    companion object {
+        const val NAME = "RecaptchaEnterpriseReactNative"
+    }
 }
