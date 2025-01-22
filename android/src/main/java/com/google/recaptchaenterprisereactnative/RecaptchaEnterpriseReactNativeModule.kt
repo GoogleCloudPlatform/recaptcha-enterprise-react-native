@@ -30,7 +30,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext) :
-ReactContextBaseJavaModule(reactContext) {
+  ReactContextBaseJavaModule(reactContext) {
   
   private lateinit var recaptchaClient: RecaptchaClient
   private val application: Application = reactContext.getApplicationContext() as Application
