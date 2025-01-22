@@ -43,12 +43,26 @@ export default function App() {
   >();
   const [token, setToken] = React.useState<string | undefined>();
   console.log('Config: ' + JSON.stringify(Config));
-
-  const siteKey =
-    Platform.OS === 'ios' ? Config.IOS_SITE_KEY : Config.ANDROID_SITE_KEY;
+  
+  const configSiteKey = (Platform.OS === 'ios' ? Config.IOS_SITE_KEY : Config.ANDROID_SITE_KEY) ?? 'SITEKEY'
+  const [siteKey, setSiteKey] = React.useState<string>(configSiteKey);
 
   return (
     <View style={styles.container}>
+
+      <Text>Action name:</Text>
+      <TextInput testID="actionId" onChangeText={setAction} value={action} />
+
+      <Text>SiteKey:</Text>
+      <Button
+        onPress={async () => {
+          setSiteKey(configSiteKey)
+        }}
+        title="Reset Site Key"
+        testID="resetSiteKeyButtonId"
+      />
+      <TextInput testID="siteKeyId" onChangeText={setSiteKey} value={siteKey} />
+
       <Button
         onPress={async () => {
           try {
@@ -64,9 +78,6 @@ export default function App() {
       />
       <Text>Fetch Client Result: </Text>
       <Text testID="fetchClientResultId">{initResult}</Text>
-
-      <Text>Action name:</Text>
-      <TextInput testID="actionId" onChangeText={setAction} value={action} />
 
       <Button
         onPress={() => {

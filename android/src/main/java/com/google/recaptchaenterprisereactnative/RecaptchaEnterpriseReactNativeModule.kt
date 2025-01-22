@@ -56,7 +56,11 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
         recaptchaClient = Recaptcha.fetchClient(application, siteKey)
         promise.resolve(null)
       } catch (exception: Exception) {
-        promise.reject(exception)
+        if (exception is RecaptchaException) {
+          promise.reject(exception.errorCode.toString(), exception.errorMessage, exception)
+        } else {
+          promise.reject(exception)
+        }      
       }
     }
   }

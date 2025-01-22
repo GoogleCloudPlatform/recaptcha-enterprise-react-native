@@ -8,6 +8,7 @@ describe('Example', () => {
   beforeEach(async () => {
     await device.reloadReactNative();
     await element(by.id('actionId')).replaceText('login');
+    await element(by.id('resetSiteKeyButtonId')).tap();
   });
 
   /* getClient (old) API */
@@ -48,6 +49,20 @@ describe('Example', () => {
       .toHaveText(errorMessage)
       .withTimeout(10000);
     await expect(element(by.id('executeResultId'))).toHaveText(errorMessage);
+  });
+
+  it('should show error for init with bad site key', async () => {
+    await element(by.id('siteKeyId')).replaceText('BADSITEKEY');
+    await element(by.id('initButtonId')).tap();
+
+    const errorMessage =
+      device.getPlatform() === 'ios'
+        ? '2 Only one site k'
+        : 'INVALID_SITEKEY Site key invali';
+    await waitFor(element(by.id('initResultId')))
+      .toHaveText(errorMessage)
+      .withTimeout(10000);
+    await expect(element(by.id('initResultId'))).toHaveText(errorMessage);
   });
 
   it('should show error if execute without init or fetch client', async () => {
@@ -94,6 +109,22 @@ describe('Example', () => {
       .toHaveText(errorMessage)
       .withTimeout(10000);
     await expect(element(by.id('clientExecuteResultId'))).toHaveText(
+      errorMessage
+    );
+  });
+
+  it('should show error for init with bad site key after fetch client', async () => {
+    await element(by.id('siteKeyId')).replaceText('BADSITEKEY');
+    await element(by.id('fetchClientButtonId')).tap();
+
+    const errorMessage =
+      device.getPlatform() === 'ios'
+        ? '2 Only one site k'
+        : 'INVALID_SITEKEY Site key invali';
+    await waitFor(element(by.id('fetchClientResultId')))
+      .toHaveText(errorMessage)
+      .withTimeout(10000);
+    await expect(element(by.id('fetchClientResultId'))).toHaveText(
       errorMessage
     );
   });
