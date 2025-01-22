@@ -2047,7 +2047,7 @@ __metadata:
     "@react-native/typescript-config": 0.75.3
     "@types/jest": ^29.5.12
     babel-plugin-module-resolver: ^5.0.0
-    detox: ^20.25.1
+    detox: ^20.32.0
     jest: ^29.7.0
     jest-cli: ^29.7.0
     react: 18.3.1
@@ -5920,16 +5920,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"detox-copilot@npm:^0.0.0":
-  version: 0.0.0
-  resolution: "detox-copilot@npm:0.0.0"
-  checksum: b70edc85fd9ff8bc70761423879c0383cf16fd372f3161354e769fc94d71857733dca422f03ab390e644620ca673d1277a46868bb6d6912ce88f547acfdeaaf9
+"detox-copilot@npm:^0.0.27":
+  version: 0.0.27
+  resolution: "detox-copilot@npm:0.0.27"
+  checksum: 4f01ed1f21fe3128ee50037b63085fe95ccdc9e723c6b034d53720fa325123e39d4f83d18b1ab88a11a679258b0ff734e74f0738118e260f10945fadbe205443
   languageName: node
   linkType: hard
 
-"detox@npm:^20.25.1":
-  version: 20.26.2
-  resolution: "detox@npm:20.26.2"
+"detox@npm:^20.32.0":
+  version: 20.32.0
+  resolution: "detox@npm:20.32.0"
   dependencies:
     ajv: ^8.6.3
     bunyan: ^1.8.12
@@ -5937,7 +5937,7 @@ __metadata:
     caf: ^15.0.1
     chalk: ^4.0.0
     child-process-promise: ^2.2.0
-    detox-copilot: ^0.0.0
+    detox-copilot: ^0.0.27
     execa: ^5.1.1
     find-up: ^5.0.0
     fs-extra: ^11.0.0
@@ -5974,7 +5974,7 @@ __metadata:
       optional: true
   bin:
     detox: local-cli/cli.js
-  checksum: 004f12811bdca09cd5a44743785c975ed6f6de9b0458aa81a464c9596ded5c1f193fbc877813072a31569e03150292bbaa5afab8a3aacd70c8427b4981b7b5db
+  checksum: ec744e071ceec728c6cad9e689612b6afdfeed765075eb801aa1b6ccb6e147cfd9a0b4ebc84349e5cf6b3f1fd5c5095e0420e3c95ae17b8e1cd1b3a06fddc22a
   languageName: node
   linkType: hard
 
