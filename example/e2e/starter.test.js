@@ -40,7 +40,10 @@ describe('Example', () => {
       .withTimeout(10000);
     await element(by.id('actionId')).replaceText('asdf $%');
     await element(by.id('executeButtonId')).tap();
-    const errorMessage = device.getPlatform() === 'ios' ? "5 Invalid Action." : 'INVALID_ACTION Invalid action ';
+    const errorMessage =
+      device.getPlatform() === 'ios'
+        ? '5 Invalid Action.'
+        : 'INVALID_ACTION Invalid action ';
     await waitFor(element(by.id('executeResultId')))
       .toHaveText(errorMessage)
       .withTimeout(10000);
@@ -56,9 +59,8 @@ describe('Example', () => {
     await expect(element(by.id('executeResultId'))).toHaveText(errorMessage);
   });
 
-
   /* fetchClient (new) API */
-  
+
   it('should have fetch client button', async () => {
     await expect(element(by.id('fetchClientButtonId'))).toBeVisible();
   });
@@ -84,7 +86,10 @@ describe('Example', () => {
     await element(by.id('fetchClientButtonId')).tap();
     await element(by.id('actionId')).replaceText('asdf $%');
     await element(by.id('clientExecuteButtonId')).tap();
-    const errorMessage = device.getPlatform() === 'ios' ? "5 Invalid Action." : 'INVALID_ACTION Invalid action ';
+    const errorMessage =
+      device.getPlatform() === 'ios'
+        ? '5 Invalid Action.'
+        : 'INVALID_ACTION Invalid action ';
     await waitFor(element(by.id('clientExecuteResultId')))
       .toHaveText(errorMessage)
       .withTimeout(10000);
