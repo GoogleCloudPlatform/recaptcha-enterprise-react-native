@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/recaptcha-enterprise-react-native",
-  "version": "18.7.0-beta01",
+  "version": "18.7.0",
   "description": "React Native plugin for reCAPTCHA Enterprise Mobile SDK",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -63,6 +63,7 @@
     "del-cli": "^5.1.0",
     "eslint": "^8.51.0",
     "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-ft-flow": "^3.0.11",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jest": "^27.9.0",
     "eslint-plugin-prettier": "^5.0.1",
@@ -169,7 +170,7 @@
     ]
   },
   "dependencies": {
-    "@google-cloud/recaptcha-enterprise-react-native": "18.7.0-beta01",
+    "@google-cloud/recaptcha-enterprise-react-native": "18.7.0",
     "@yarnpkg/plugin-interactive-tools": "^4.0.0"
   }
 }

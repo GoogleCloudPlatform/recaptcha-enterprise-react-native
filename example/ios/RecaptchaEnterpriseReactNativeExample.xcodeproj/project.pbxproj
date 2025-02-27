@@ -9,10 +9,9 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* RecaptchaEnterpriseReactNativeExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* RecaptchaEnterpriseReactNativeExampleTests.m */; };
 		07904C15B174F35B985D252C /* Pods_RecaptchaEnterpriseReactNativeExample_RecaptchaEnterpriseReactNativeExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8CC4E9A5F0F071D8E332603 /* Pods_RecaptchaEnterpriseReactNativeExample_RecaptchaEnterpriseReactNativeExampleTests.framework */; };
-		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
-		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		47B6B23AC1033500BCF9A40D /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 66918E91FBE82B4B1BDD08CA /* PrivacyInfo.xcprivacy */; };
+		7B23F2DD2D6D67A1001FF03B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B23F2DC2D6D679C001FF03B /* AppDelegate.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		B066B8B9E5589223CAEF05A4 /* Pods_RecaptchaEnterpriseReactNativeExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17D1699402DFBFD792B29962 /* Pods_RecaptchaEnterpriseReactNativeExample.framework */; };
 /* End PBXBuildFile section */
@@ -32,16 +31,15 @@
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* RecaptchaEnterpriseReactNativeExampleTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecaptchaEnterpriseReactNativeExampleTests.m; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* RecaptchaEnterpriseReactNativeExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecaptchaEnterpriseReactNativeExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = RecaptchaEnterpriseReactNativeExample/AppDelegate.h; sourceTree = "<group>"; };
-		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = RecaptchaEnterpriseReactNativeExample/AppDelegate.mm; sourceTree = "<group>"; };
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = RecaptchaEnterpriseReactNativeExample/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = RecaptchaEnterpriseReactNativeExample/Info.plist; sourceTree = "<group>"; };
-		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = RecaptchaEnterpriseReactNativeExample/main.m; sourceTree = "<group>"; };
 		17D1699402DFBFD792B29962 /* Pods_RecaptchaEnterpriseReactNativeExample.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecaptchaEnterpriseReactNativeExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B4392A12AC88292D35C810B /* Pods-RecaptchaEnterpriseReactNativeExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecaptchaEnterpriseReactNativeExample.debug.xcconfig"; path = "Target Support Files/Pods-RecaptchaEnterpriseReactNativeExample/Pods-RecaptchaEnterpriseReactNativeExample.debug.xcconfig"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-RecaptchaEnterpriseReactNativeExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecaptchaEnterpriseReactNativeExample.release.xcconfig"; path = "Target Support Files/Pods-RecaptchaEnterpriseReactNativeExample/Pods-RecaptchaEnterpriseReactNativeExample.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-RecaptchaEnterpriseReactNativeExample-RecaptchaEnterpriseReactNativeExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecaptchaEnterpriseReactNativeExample-RecaptchaEnterpriseReactNativeExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-RecaptchaEnterpriseReactNativeExample-RecaptchaEnterpriseReactNativeExampleTests/Pods-RecaptchaEnterpriseReactNativeExample-RecaptchaEnterpriseReactNativeExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
-		66918E91FBE82B4B1BDD08CA /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; name = PrivacyInfo.xcprivacy; path = RecaptchaEnterpriseReactNativeExample/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		66918E91FBE82B4B1BDD08CA /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = RecaptchaEnterpriseReactNativeExample/PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		7B23F2DC2D6D679C001FF03B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		7B23F2DE2D6D67AC001FF03B /* RecaptchaEnterpriseReactNativeExample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RecaptchaEnterpriseReactNativeExample-Bridging-Header.h"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = RecaptchaEnterpriseReactNativeExample/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-RecaptchaEnterpriseReactNativeExample-RecaptchaEnterpriseReactNativeExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RecaptchaEnterpriseReactNativeExample-RecaptchaEnterpriseReactNativeExampleTests.release.xcconfig"; path = "Target Support Files/Pods-RecaptchaEnterpriseReactNativeExample-RecaptchaEnterpriseReactNativeExampleTests/Pods-RecaptchaEnterpriseReactNativeExample-RecaptchaEnterpriseReactNativeExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		B8CC4E9A5F0F071D8E332603 /* Pods_RecaptchaEnterpriseReactNativeExample_RecaptchaEnterpriseReactNativeExampleTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RecaptchaEnterpriseReactNativeExample_RecaptchaEnterpriseReactNativeExampleTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,13 +86,12 @@
 		13B07FAE1A68108700A75B9A /* RecaptchaEnterpriseReactNativeExample */ = {
 			isa = PBXGroup;
 			children = (
-				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
-				13B07FB01A68108700A75B9A /* AppDelegate.mm */,
+				7B23F2DC2D6D679C001FF03B /* AppDelegate.swift */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */,
-				13B07FB71A68108700A75B9A /* main.m */,
 				66918E91FBE82B4B1BDD08CA /* PrivacyInfo.xcprivacy */,
+				7B23F2DE2D6D67AC001FF03B /* RecaptchaEnterpriseReactNativeExample-Bridging-Header.h */,
 			);
 			name = RecaptchaEnterpriseReactNativeExample;
 			sourceTree = "<group>";
@@ -209,7 +206,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1620;
 					};
 				};
 			};
@@ -396,8 +393,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
-				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				7B23F2DD2D6D67A1001FF03B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +480,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = google.TestApp;
 				PRODUCT_NAME = RecaptchaEnterpriseReactNativeExample;
+				SWIFT_OBJC_BRIDGING_HEADER = "RecaptchaEnterpriseReactNativeExample-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -510,6 +507,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = google.TestApp;
 				PRODUCT_NAME = RecaptchaEnterpriseReactNativeExample;
+				SWIFT_OBJC_BRIDGING_HEADER = "RecaptchaEnterpriseReactNativeExample-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
