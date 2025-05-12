@@ -86,7 +86,11 @@ export default function App() {
             recaptchaClient
               .execute(new RecaptchaAction(action), 10000)
               .then((newToken) => {
-                setExecuteResult(newToken.startsWith('03') ? 'ok' : 'error');
+                setExecuteResult(
+                  newToken.startsWith('03A') || newToken.startsWith('0cA')
+                    ? 'ok'
+                    : 'error'
+                );
                 setToken(newToken);
               })
               .catch((error) => {
@@ -126,7 +130,11 @@ export default function App() {
         onPress={() =>
           execute(new RecaptchaAction(action), 10000)
             .then((newToken) => {
-              setExecuteResult(newToken.startsWith('03') ? 'ok' : 'error');
+              setExecuteResult(
+                newToken.startsWith('03A') || newToken.startsWith('0cA')
+                  ? 'ok'
+                  : 'error'
+              );
               setToken(newToken);
             })
             .catch((error) => {
