@@ -37,9 +37,10 @@ def isNewArchitectureEnabled() {
 apply plugin: "com.android.library"
 apply plugin: "kotlin-android"
 
-if (isNewArchitectureEnabled()) {
+// Remove per: https://github.com/callstack/react-native-builder-bob/issues/774#issuecomment-2674585468
+/*if (isNewArchitectureEnabled()) {
   apply plugin: "com.facebook.react"
-}
+}*/
 
 def getExtOrDefault(name) {
   return rootProject.ext.has(name) ? rootProject.ext.get(name) : project.properties["RecaptchaEnterpriseReactNative_" + name]
