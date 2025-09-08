@@ -1,3 +1,7 @@
+## 18.8.0-beta02
+
+* Upgrade iOS and Android SDK to 18.8.0-beta02
+
 ## 18.7.1
 *   Update Android to '=18.7.1' and iOS to '[18.7.0,18.7.1]'
 
