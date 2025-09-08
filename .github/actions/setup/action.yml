@@ -10,7 +10,9 @@ runs:
         node-version-file: .nvmrc
         cache: yarn
     
-    - run: corepack enable
+    - name: Enable corepack
+      run: corepack enable
+      shell: bash
 
     - name: Install dependencies
       run: yarn install
