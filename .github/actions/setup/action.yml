@@ -5,20 +5,15 @@ runs:
   using: composite
   steps:
     - name: Setup Node.js
-      uses: actions/setup-node@v5
+      uses: actions/setup-node@v4
       with:
         node-version-file: .nvmrc
-        package-manager-cache: false #https://github.com/actions/setup-node/issues/1357#issuecomment-3265614223
+#        package-manager-cache: false #https://github.com/actions/setup-node/issues/1357#issuecomment-3265614223
     
     - name: Enable corepack
       run: corepack enable
       shell: bash
-    
-    - name: Setup Node.js with cache
-      uses: actions/setup-node@v5
-      with:
-        package-manager-cache: true
-    
+       
     - name: Install dependencies
       run: yarn install
       shell: bash
