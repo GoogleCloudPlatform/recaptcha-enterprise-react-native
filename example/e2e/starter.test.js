@@ -8,6 +8,7 @@ describe('Example', () => {
   beforeEach(async () => {
     await device.reloadReactNative();
     await element(by.id('actionId')).replaceText('login');
+    await element(by.id('actionId')).tapReturnKey();
     await element(by.id('resetSiteKeyButtonId')).tap();
   });
 
@@ -40,6 +41,7 @@ describe('Example', () => {
       .toHaveText('ok')
       .withTimeout(10000);
     await element(by.id('actionId')).replaceText('asdf $%');
+    await element(by.id('actionId')).tapReturnKey();
     await element(by.id('executeButtonId')).tap();
     const errorMessage =
       device.getPlatform() === 'ios'

@@ -8,8 +8,11 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version-file: .nvmrc
-        cache: yarn
 
+    - name: Enable corepack
+      run: corepack enable
+      shell: bash
+       
     - name: Install dependencies
       run: yarn install
       shell: bash
