@@ -28,6 +28,9 @@ describe('Example', () => {
 
   it('should show token after execute', async () => {
     await element(by.id('initButtonId')).tap();
+    await waitFor(element(by.id('initResultId')))
+      .toHaveText('ok')
+      .withTimeout(10000);
     await element(by.id('executeButtonId')).tap();
     await waitFor(element(by.id('executeResultId')))
       .toHaveText('ok')
@@ -59,7 +62,7 @@ describe('Example', () => {
 
     const errorMessage =
       device.getPlatform() === 'ios'
-        ? '2 Only one site k'
+        ? '2 Invalid Site Ke'
         : 'INVALID_SITEKEY Site key invali';
     await waitFor(element(by.id('initResultId')))
       .toHaveText(errorMessage)
@@ -115,20 +118,20 @@ describe('Example', () => {
     );
   });
 
-  it('should show error for init with bad site key after fetch client', async () => {
+  it('should show error for execute with bad site key after fetch client', async () => {
     await element(by.id('siteKeyId')).replaceText('BADSITEKEY');
     await element(by.id('fetchClientButtonId')).tap();
+    await element(by.id('clientExecuteButtonId')).tap();
 
     const errorMessage =
       device.getPlatform() === 'ios'
-        ? '2 Only one site k'
+        ? '2 Invalid Site Ke'
         : 'INVALID_SITEKEY Site key invali';
-    await waitFor(element(by.id('fetchClientResultId')))
+
+    await waitFor(element(by.id('executeResultId')))
       .toHaveText(errorMessage)
       .withTimeout(10000);
-    await expect(element(by.id('fetchClientResultId'))).toHaveText(
-      errorMessage
-    );
+    await expect(element(by.id('executeResultId'))).toHaveText(errorMessage);
   });
 
   it('should show error if client execute without init or fetch client', async () => {
