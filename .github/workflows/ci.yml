@@ -47,7 +47,7 @@ jobs:
       - name: Build package
         run: yarn prepare
 
-  build-android-e2e:
+  test-android-e2e:
     runs-on: ubuntu-latest
 
     steps:
@@ -104,7 +104,7 @@ jobs:
           avd-name: ${{ steps.device.outputs.AVD_NAME }}
           script: cd example && yarn detox test --configuration android.emu.release --headless --record-logs all
 
-  build-ios-e2e:
+  test-ios-e2e:
     runs-on: macos-15-xlarge
 
     steps:

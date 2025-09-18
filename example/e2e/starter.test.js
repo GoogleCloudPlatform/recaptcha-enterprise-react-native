@@ -6,7 +6,7 @@ describe('Example', () => {
   });
 
   beforeEach(async () => {
-    await device.launchApp({newInstance: true});
+    await device.launchApp({ newInstance: true });
     await element(by.id('actionId')).replaceText('login');
     await element(by.id('actionId')).tapReturnKey();
     await element(by.id('resetSiteKeyButtonId')).tap();
