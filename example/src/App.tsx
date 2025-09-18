@@ -91,7 +91,7 @@ export default function App() {
                     ? 'ok'
                     : 'error'
                 );
-                setToken(newToken);
+                setToken(newToken.substring(0, 15) + "...");
               })
               .catch((error) => {
                 setExecuteResult(
@@ -135,7 +135,7 @@ export default function App() {
                   ? 'ok'
                   : 'error'
               );
-              setToken(newToken);
+              setToken(newToken.substring(0, 15) + "...");
             })
             .catch((error) => {
               setExecuteResult(
