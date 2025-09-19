@@ -95,6 +95,9 @@ describe('Example', () => {
 
   it('should show token after fetch client and execute', async () => {
     await element(by.id('fetchClientButtonId')).tap();
+    await waitFor(element(by.id('fetchClientResultId')))
+      .toHaveText('ok')
+      .withTimeout(10000);
     await element(by.id('clientExecuteButtonId')).tap();
     await waitFor(element(by.id('clientExecuteResultId')))
       .toHaveText('ok')
@@ -104,6 +107,9 @@ describe('Example', () => {
 
   it('should show error execute with bad action after fetch client', async () => {
     await element(by.id('fetchClientButtonId')).tap();
+    await waitFor(element(by.id('fetchClientResultId')))
+      .toHaveText('ok')
+      .withTimeout(10000);
     await element(by.id('actionId')).replaceText('asdf $%');
     await element(by.id('clientExecuteButtonId')).tap();
     const errorMessage =
@@ -121,6 +127,9 @@ describe('Example', () => {
   it('should show error for execute with bad site key after fetch client', async () => {
     await element(by.id('siteKeyId')).replaceText('BADSITEKEY');
     await element(by.id('fetchClientButtonId')).tap();
+    await waitFor(element(by.id('fetchClientResultId')))
+      .toHaveText('ok')
+      .withTimeout(10000);
     await element(by.id('clientExecuteButtonId')).tap();
 
     const errorMessage =
