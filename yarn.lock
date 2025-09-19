@@ -3293,7 +3293,7 @@ __metadata:
     "@types/jest": ^29.5.13
     "@types/react": ^19.0.0
     babel-plugin-module-resolver: ^5.0.0
-    detox: ^20.38.0
+    detox: ^20.41.3
     jest: ^29.7.0
     jest-cli: ^29.7.0
     react: 19.0.0
@@ -5324,9 +5324,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@wix-pilot/core@npm:^3.3.0":
-  version: 3.3.4
-  resolution: "@wix-pilot/core@npm:3.3.4"
+"@wix-pilot/core@npm:^3.4.1":
+  version: 3.4.2
+  resolution: "@wix-pilot/core@npm:3.4.2"
   dependencies:
     chalk: ^4.1.0
     pngjs: ^7.0.0
@@ -5336,18 +5336,18 @@ __metadata:
   peerDependenciesMeta:
     expect:
       optional: true
-  checksum: 6d168705613ca96844b8bda4a7391256568c44d5a0c07ba2aa7942b322500bfbd0471277136284b4901554c839ceacea7da338483dadbeaa2c312f87cfeaa33c
+  checksum: 22438405bda5bd09d8d6e2686695cf14a6aedb917f20405bd6b130b9f7aa9f316c9617031e356786acc7772bca030c665b379729fe0cf5ff9bce56a1b0c0955b
   languageName: node
   linkType: hard
 
-"@wix-pilot/detox@npm:^1.0.11":
-  version: 1.0.11
-  resolution: "@wix-pilot/detox@npm:1.0.11"
+"@wix-pilot/detox@npm:^1.0.13":
+  version: 1.0.13
+  resolution: "@wix-pilot/detox@npm:1.0.13"
   peerDependencies:
-    "@wix-pilot/core": ^3.1.6
+    "@wix-pilot/core": ^3.4.1
     detox: ">=20.33.0"
     expect: 29.x.x || 28.x.x || ^27.2.5
-  checksum: d48d78f98569ebbcfee918a894b7e0dfb9c352b2bcca729a09c60a007192ca1c60db4d14a24ffd190186294f6c8b3333f42dfd1385786a42a40dccc42edd65a5
+  checksum: eaff282d662f4849317f6601b3cd3e0514e06b7772d850498f294e9e4ad65d4dcd9c8e5dda46796a510b4338e20a37f76ff852959907b92fef5da5abb6c0a152
   languageName: node
   linkType: hard
 
@@ -7824,12 +7824,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"detox@npm:^20.38.0":
-  version: 20.39.0
-  resolution: "detox@npm:20.39.0"
+"detox@npm:^20.41.3":
+  version: 20.41.3
+  resolution: "detox@npm:20.41.3"
   dependencies:
-    "@wix-pilot/core": ^3.3.0
-    "@wix-pilot/detox": ^1.0.11
+    "@wix-pilot/core": ^3.4.1
+    "@wix-pilot/detox": ^1.0.13
     ajv: ^8.6.3
     bunyan: ^1.8.12
     bunyan-debug-stream: ^3.1.0
@@ -7841,7 +7841,7 @@ __metadata:
     funpermaproxy: ^1.1.0
     glob: ^8.0.3
     ini: ^1.3.4
-    jest-environment-emit: ^1.0.8
+    jest-environment-emit: ^1.2.0
     json-cycle: ^1.3.0
     lodash: ^4.17.11
     multi-sort-stream: ^1.0.3
@@ -7858,7 +7858,7 @@ __metadata:
     stream-json: ^1.7.4
     strip-ansi: ^6.0.1
     telnet-client: 1.2.8
-    tempfile: ^2.0.0
+    tmp: ^0.2.1
     trace-event-lib: ^1.3.1
     which: ^1.3.1
     ws: ^7.0.0
@@ -7866,13 +7866,13 @@ __metadata:
     yargs-parser: ^21.0.0
     yargs-unparser: ^2.0.0
   peerDependencies:
-    jest: 29.x.x || 28.x.x || ^27.2.5
+    jest: 30.x.x || 29.x.x || 28.x.x || ^27.2.5
   peerDependenciesMeta:
     jest:
       optional: true
   bin:
     detox: local-cli/cli.js
-  checksum: 5381969ba264e75bdcc0cb758f5fd1414bb9e70027c01a0ca62057c9a8ea19723527b747298292bf52c1a6931ddbece905f968a9bd87d657a3253a591cf3fb20
+  checksum: 417f0e860be815f35e535356b61102e7efa918d2369cebce65da6e414345b9cf0c93e489bb6fbfc332c3237b81e44c36d7501a69f307f8f2f561151b80e4aeda
   languageName: node
   linkType: hard
 
@@ -11266,9 +11266,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"jest-environment-emit@npm:^1.0.8":
-  version: 1.0.8
-  resolution: "jest-environment-emit@npm:1.0.8"
+"jest-environment-emit@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "jest-environment-emit@npm:1.2.0"
   dependencies:
     bunyamin: ^1.5.2
     bunyan: ^2.0.5
@@ -11295,7 +11295,7 @@ __metadata:
       optional: true
     jest-environment-node:
       optional: true
-  checksum: 0c7bafbd3a6e5952f6abb45958f0d2997371d29b29f3876afda48d1d734ccd703577aaac0d5afec2e19dc33a9db0e9458721fe73dbe797f0ced21481d908acfd
+  checksum: 58d0652ca6d51dbb3c116e52ae1f1bd046f735e7b94a33704070844775257d15a0aaebd051062b5b24741261571b5120afd88b6c5bc87123d38959856d17ac99
   languageName: node
   linkType: hard
 
@@ -16537,29 +16537,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"temp-dir@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "temp-dir@npm:1.0.0"
-  checksum: cb2b58ddfb12efa83e939091386ad73b425c9a8487ea0095fe4653192a40d49184a771a1beba99045fbd011e389fd563122d79f54f82be86a55620667e08a6b2
-  languageName: node
-  linkType: hard
-
 "temp@npm:^0.8.4":
   version: 0.8.4
   resolution: "temp@npm:0.8.4"
   dependencies:
     rimraf: ~2.6.2
   checksum: f35bed78565355dfdf95f730b7b489728bd6b7e35071bcc6497af7c827fb6c111fbe9063afc7b8cbc19522a072c278679f9a0ee81e684aa2c8617cc0f2e9c191
-  languageName: node
-  linkType: hard
-
-"tempfile@npm:^2.0.0":
-  version: 2.0.0
-  resolution: "tempfile@npm:2.0.0"
-  dependencies:
-    temp-dir: ^1.0.0
-    uuid: ^3.0.1
-  checksum: 8a92a0f57e0ae457dfbc156b14c427b42048a86ca6bade311835cc2aeda61b25b82d688f71f2d663dde6f172f479ed07293b53f7981e41cb6f9120a3eb4fe797
   languageName: node
   linkType: hard
 
@@ -16662,6 +16645,13 @@ __metadata:
   dependencies:
     os-tmpdir: ~1.0.2
   checksum: 902d7aceb74453ea02abbf58c203f4a8fc1cead89b60b31e354f74ed5b3fb09ea817f94fb310f884a5d16987dd9fa5a735412a7c2dd088dd3d415aa819ae3a28
+  languageName: node
+  linkType: hard
+
+"tmp@npm:^0.2.1":
+  version: 0.2.5
+  resolution: "tmp@npm:0.2.5"
+  checksum: 9d18e58060114154939930457b9e198b34f9495bcc05a343bc0a0a29aa546d2c1c2b343dae05b87b17c8fde0af93ab7d8fe8574a8f6dc2cd8fd3f2ca1ad0d8e1
   languageName: node
   linkType: hard
 
@@ -17370,15 +17360,6 @@ __metadata:
   version: 1.0.1
   resolution: "utils-merge@npm:1.0.1"
   checksum: c81095493225ecfc28add49c106ca4f09cdf56bc66731aa8dabc2edbbccb1e1bfe2de6a115e5c6a380d3ea166d1636410b62ef216bb07b3feb1cfde1d95d5080
-  languageName: node
-  linkType: hard
-
-"uuid@npm:^3.0.1":
-  version: 3.4.0
-  resolution: "uuid@npm:3.4.0"
-  bin:
-    uuid: ./bin/uuid
-  checksum: 58de2feed61c59060b40f8203c0e4ed7fd6f99d42534a499f1741218a1dd0c129f4aa1de797bcf822c8ea5da7e4137aa3673431a96dae729047f7aca7b27866f
   languageName: node
   linkType: hard
 

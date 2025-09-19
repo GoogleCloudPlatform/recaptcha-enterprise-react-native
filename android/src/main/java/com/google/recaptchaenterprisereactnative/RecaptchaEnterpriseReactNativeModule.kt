@@ -26,7 +26,9 @@ import com.google.android.recaptcha.Recaptcha
 import com.google.android.recaptcha.RecaptchaAction
 import com.google.android.recaptcha.RecaptchaClient
 import com.google.android.recaptcha.RecaptchaException
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
 class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext) :
@@ -34,7 +36,8 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
   
   private lateinit var recaptchaClient: RecaptchaClient
   private val application: Application = reactContext.getApplicationContext() as Application
-  
+  private val recaptchaModuleScope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+
   override fun getName(): String {
     return NAME
   }
@@ -51,7 +54,7 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
   
   @ReactMethod
   fun fetchClient(siteKey: String, promise: Promise) {
-    GlobalScope.launch {
+    recaptchaModuleScope.launch {
       try {
         recaptchaClient = Recaptcha.fetchClient(application, siteKey)
         promise.resolve(null)
@@ -67,7 +70,7 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
   
   @ReactMethod
   fun initClient(siteKey: String, arguments: ReadableMap, promise: Promise) {
-    GlobalScope.launch {
+    recaptchaModuleScope.launch {
       let {
         if (arguments.hasKey("timeout")) {
           // JS+ReadableMap have no support for long
@@ -98,7 +101,7 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
     
     val action = mapAction(actionStr)
     
-    GlobalScope.launch {
+    recaptchaModuleScope.launch {
       recaptchaClient
       .let {
         if (arguments.hasKey("timeout")) {
