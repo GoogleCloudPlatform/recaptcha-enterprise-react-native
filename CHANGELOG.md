@@ -1,3 +1,6 @@
+## 18.8.1
+*   Update iOS to '=18.8.1' and Android to '[18.8.0,18.8.1]'
+
 ## 18.8.0
 
 * Upgrade iOS and Android SDK to 18.8.0
