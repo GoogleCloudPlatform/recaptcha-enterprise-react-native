@@ -29,7 +29,7 @@ If using VSCode install eslint:
 You may need to use an older JDK:
 
 ```bash
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-19-latest/Contents/Home
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
 ```
 
 ### Podfile
