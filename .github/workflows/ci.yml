@@ -96,6 +96,14 @@ jobs:
           cd example
           yarn detox build --configuration android.emu.release
   
+      - name: Free Disk Space
+        run: |
+          sudo rm -rf /opt/hostedtoolcache
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /opt/ghc
+          sudo rm -rf "/usr/local/share/boost"
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+
       - name: E2E test for Android
         uses: reactivecircus/android-emulator-runner@v2
         with:
