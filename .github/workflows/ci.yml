@@ -103,6 +103,10 @@ jobs:
           sudo rm -rf /opt/ghc
           sudo rm -rf "/usr/local/share/boost"
           sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          sudo docker image prune --all --force
+          sudo docker builder prune -a
+    
+      - run: df -h
 
       - name: E2E test for Android
         uses: reactivecircus/android-emulator-runner@v2
