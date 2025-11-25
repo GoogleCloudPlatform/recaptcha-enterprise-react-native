@@ -8,7 +8,6 @@ describe('Example', () => {
     await element(by.id('resetSiteKeyButtonId')).tap();
   });
 
-
   it('should show error execute with bad action', async () => {
     await element(by.id('initButtonId')).tap();
     await waitFor(element(by.id('initResultId')))
