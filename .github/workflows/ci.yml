@@ -124,7 +124,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: detox-artifacts
-          path: artifacts
+          path: example/artifacts
           retention-days: 5
 
   test-ios-e2e:
@@ -198,5 +198,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: detox-artifacts
-          path: artifacts
+          path: example/artifacts
           retention-days: 5
