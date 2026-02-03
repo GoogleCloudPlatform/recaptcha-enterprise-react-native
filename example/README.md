@@ -102,7 +102,9 @@ When the `Metro` server start either press `i` for iOS and `a` for Android.
 brew tap wix/brew && brew install applesimutils
 
 cd example && npx detox build --configuration ios.sim.debug && npx detox test --configuration ios.sim.debug
+cd example && npx detox build --configuration ios.sim.release && npx detox test --configuration ios.sim.release
 
 cd example && npx detox build --configuration android.emu.debug && npx detox test --configuration android.emu.debug
+cd example && npx detox build --configuration android.emu.release && npx detox test --configuration android.emu.release
 ```
 

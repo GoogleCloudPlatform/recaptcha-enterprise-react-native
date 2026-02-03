@@ -56,6 +56,19 @@ jobs:
 
       - name: Setup
         uses: ./.github/actions/setup
+      
+      - name: Delete unnecessary tools 🔧
+        uses: jlumbroso/free-disk-space@main
+        with:
+          android: false 
+          tool-cache: true
+          dotnet: true 
+          haskell: true 
+          swap-storage: true 
+          docker-images: false 
+          large-packages: false
+    
+      - run: df -h
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -95,27 +108,15 @@ jobs:
         run: |
           cd example
           yarn detox build --configuration android.emu.release
-  
-      - name: Free Disk Space
-        run: |
-          sudo rm -rf /opt/hostedtoolcache
-          sudo rm -rf /usr/share/dotnet
-          sudo rm -rf /opt/ghc
-          sudo rm -rf "/usr/local/share/boost"
-          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
-          sudo docker image prune --all --force
-          sudo docker builder prune -a
-    
-      - run: df -h
 
       - name: E2E test for Android
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 31
+          api-level: 28
           arch: x86_64
           avd-name: ${{ steps.device.outputs.AVD_NAME }}
           force-avd-creation: false
-          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -no-metrics
+          emulator-options: -no-snapshot-save -gpu swiftshader_indirect
           disable-animations: false
           script: cd example && yarn detox test --configuration android.emu.release --headless --record-logs all --record-videos failing --take-screenshots failing
 
