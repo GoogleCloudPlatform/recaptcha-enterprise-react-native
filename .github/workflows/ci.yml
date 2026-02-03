@@ -111,10 +111,13 @@ jobs:
       - name: E2E test for Android
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 35
+          api-level: 31
           arch: x86_64
           avd-name: ${{ steps.device.outputs.AVD_NAME }}
-          script: cd example && yarn detox test --configuration android.emu.release --headless --record-logs all
+          force-avd-creation: false
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none -no-metrics
+          disable-animations: false
+          script: cd example && yarn detox test --configuration android.emu.release --headless --record-logs all --record-videos failing --take-screenshots failing
 
       - name: Upload artifacts
         if: failure()
@@ -122,7 +125,8 @@ jobs:
         with:
           name: detox-artifacts
           path: artifacts
-  
+          retention-days: 5
+
   test-ios-e2e:
     runs-on: macos-15-xlarge
 
@@ -187,4 +191,12 @@ jobs:
 #        continue-on-error: true # iOS test is flaky, run locally for now
         run:  |
           cd example
-          yarn detox test --configuration ios.sim.release --headless --record-logs all      
+          yarn detox test --configuration ios.sim.release --headless --record-logs all --record-videos failing --take-screenshots failing
+
+      - name: Upload artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: detox-artifacts
+          path: artifacts
+          retention-days: 5
