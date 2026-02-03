@@ -56,19 +56,6 @@ jobs:
 
       - name: Setup
         uses: ./.github/actions/setup
-      
-      - name: Delete unnecessary tools 🔧
-        uses: jlumbroso/free-disk-space@main
-        with:
-          android: false 
-          tool-cache: true
-          dotnet: true 
-          haskell: true 
-          swap-storage: true 
-          docker-images: false 
-          large-packages: false
-    
-      - run: df -h
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -109,6 +96,19 @@ jobs:
           cd example
           yarn detox build --configuration android.emu.release
 
+      - name: Delete unnecessary tools 🔧
+        uses: jlumbroso/free-disk-space@main
+        with:
+          android: false 
+          tool-cache: true
+          dotnet: true 
+          haskell: true 
+          swap-storage: true 
+          docker-images: false 
+          large-packages: false
+    
+      - run: df -h
+      
       - name: E2E test for Android
         uses: reactivecircus/android-emulator-runner@v2
         with:
