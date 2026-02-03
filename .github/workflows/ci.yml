@@ -111,11 +111,18 @@ jobs:
       - name: E2E test for Android
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: 31
+          api-level: 35
           arch: x86_64
           avd-name: ${{ steps.device.outputs.AVD_NAME }}
           script: cd example && yarn detox test --configuration android.emu.release --headless --record-logs all
 
+      - name: Upload artifacts
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: detox-artifacts
+          path: artifacts
+  
   test-ios-e2e:
     runs-on: macos-15-xlarge
 
