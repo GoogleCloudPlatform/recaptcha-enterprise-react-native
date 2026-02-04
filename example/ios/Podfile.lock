@@ -2479,7 +2479,7 @@ PODS:
     - React-perflogger (= 0.83.0)
     - React-utils (= 0.83.0)
     - SocketRocket
-  - recaptcha-enterprise-react-native (18.8.2):
+  - recaptcha-enterprise-react-native (18.9.0-beta01):
     - boost
     - DoubleConversion
     - fast_float
@@ -2505,6 +2505,8 @@ PODS:
     - ReactCodegen
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
+    - RecaptchaEnterprise (= 18.9.0-beta01)
+    - SocketRocket
     - Yoga
   - RecaptchaEnterprise (18.9.0-beta01):
     - RecaptchaEnterpriseSDK (= 18.9.0-beta01)
@@ -2772,7 +2774,7 @@ SPEC CHECKSUMS:
   FBLazyVector: a293a88992c4c33f0aee184acab0b64a08ff9458
   fmt: a40bb5bd0294ea969aaaba240a927bd33d878cdd
   glog: 5683914934d5b6e4240e497e0f4a3b42d1854183
-  hermes-engine: 80e1c2afc6c9460990bf320e71b20e34c790b54f
+  hermes-engine: acee68e3e70ff7a3e71285f258256f1a1f153ef5
   RCT-Folly: 846fda9475e61ec7bcbf8a3fe81edfcaeb090669
   RCTDeprecation: 2b70c6e3abe00396cefd8913efbf6a2db01a2b36
   RCTRequired: f3540eee8094231581d40c5c6d41b0f170237a81
@@ -2843,9 +2845,9 @@ SPEC CHECKSUMS:
   ReactAppDependencyProvider: ebcf3a78dc1bcdf054c9e8d309244bade6b31568
   ReactCodegen: 0c8601ce03eb3f724f4d251e4aa158555bf20942
   ReactCommon: 913c93ca20654c90cc57a3dd9e291b4ef9956e54
-  recaptcha-enterprise-react-native: 8eed3356bb97abcc27ce6eb5f65d534ff0c761da
-  RecaptchaEnterprise: 2d06f415c94253c3e92214a4d1472b5875442cdc
-  RecaptchaEnterpriseSDK: 2fd06a12a27f943c24f643f8814404a27cc74288
+  recaptcha-enterprise-react-native: 6282cbce205dcf42e61904ea8dd386fe863f6e6f
+  RecaptchaEnterprise: 75005b1cd09459e1661fdad5608558017f23c674
+  RecaptchaEnterpriseSDK: c5c12f95e6b59a76ca48709fbbb14d277848d4a7
   RecaptchaInterop: 11e0b637842dfb48308d242afc3f448062325aba
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: faec420ba5f8a2bd196f26048a0557882d40e5b9
