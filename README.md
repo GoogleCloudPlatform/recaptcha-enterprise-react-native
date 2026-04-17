@@ -32,6 +32,44 @@ You may need to use an older JDK:
 export JAVA_HOME=/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home
 ```
 
+### Enabling Google Desugaring
+
+At app's build.gradle
+
+```gradle
+android {
+    //...previous code
+    compileOptions {
+        coreLibraryDesugaringEnabled true
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+  coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.1.3'
+}
+```
+
+Or build.gradle.kts
+
+```kotlin
+android {
+    //...previous code
+    compileOptions {
+        isCoreLibraryDesugaringEnabled = true
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.3")
+}
+```
+
+[Google reference for enabling desugaring](https://developer.android.com/studio/write/java8-support?hl=pt-br#library-desugaring)
+
 ### Podfile
 
 Similar to
