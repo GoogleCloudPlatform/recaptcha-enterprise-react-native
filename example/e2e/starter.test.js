@@ -107,10 +107,10 @@ describe('Example', () => {
         ? '2 Invalid Site Ke'
         : 'INVALID_SITEKEY Site key invali';
 
-    await waitFor(element(by.id('executeResultId')))
+    await waitFor(element(by.id('clientExecuteResultId')))
       .toHaveText(errorMessage)
       .withTimeout(10000);
-    await expect(element(by.id('executeResultId'))).toHaveText(errorMessage);
+    await expect(element(by.id('clientExecuteResultId'))).toHaveText(errorMessage);
   });
 
   it('should show error if client execute without init or fetch client', async () => {

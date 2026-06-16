@@ -16,6 +16,13 @@ import RecaptchaEnterprise
 
 @objc(RecaptchaEnterpriseReactNative)
 class RecaptchaEnterpriseReactNative: NSObject {
+  private let queue = DispatchQueue(label: "com.google.recaptcha.reactnative")
+
+  @objc
+  var methodQueue: DispatchQueue {
+    return queue
+  }
+
   var recaptchaClient: RecaptchaClient?
 
   private func mapAction(_ actionStr: String) -> RecaptchaAction {
