@@ -110,7 +110,9 @@ describe('Example', () => {
     await waitFor(element(by.id('clientExecuteResultId')))
       .toHaveText(errorMessage)
       .withTimeout(10000);
-    await expect(element(by.id('clientExecuteResultId'))).toHaveText(errorMessage);
+    await expect(element(by.id('clientExecuteResultId'))).toHaveText(
+      errorMessage
+    );
   });
 
   it('should show error if client execute without init or fetch client', async () => {
