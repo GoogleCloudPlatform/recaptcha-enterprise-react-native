@@ -77,7 +77,7 @@ jobs:
         env:
           JAVA_OPTS: "-XX:MaxHeapSize=6g"
         run: |
-          yarn run build:android
+          yarn example build:android
       
       - name: Get device name
         id: device
@@ -109,6 +109,11 @@ jobs:
     
       - run: df -h
       
+      - name: Pre-install Android Emulator System Image
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-28;default;x86_64" || true
+
       - name: E2E test for Android
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -176,7 +181,7 @@ jobs:
 
       - name: Build example for iOS
         run: |
-          yarn run build:ios
+          yarn example build:ios
     
       - name: Detox rebuild framework cache
         run: |
