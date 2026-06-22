@@ -35,7 +35,6 @@ def isNewArchitectureEnabled() {
 }
 
 apply plugin: "com.android.library"
-// apply plugin: "kotlin-android"
 
 // Remove per: https://github.com/callstack/react-native-builder-bob/issues/774#issuecomment-2674585468
 /*if (isNewArchitectureEnabled()) {
