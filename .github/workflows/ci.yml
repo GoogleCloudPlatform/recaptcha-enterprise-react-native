@@ -48,7 +48,7 @@ jobs:
         run: yarn prepare
 
   test-android-e2e:
-    runs-on: macos-15
+    runs-on: macos-13
 
     steps:
       - name: Checkout
