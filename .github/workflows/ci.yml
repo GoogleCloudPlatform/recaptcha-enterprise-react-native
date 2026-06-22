@@ -121,8 +121,9 @@ jobs:
           arch: x86_64
           avd-name: ${{ steps.device.outputs.AVD_NAME }}
           force-avd-creation: false
-          emulator-options: -no-snapshot-save -gpu swiftshader_indirect
-          disable-animations: false
+          emulator-boot-timeout: 1800
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -no-audio -no-boot-anim -camera-back none
+          disable-animations: true
           script: cd example && yarn detox test --configuration android.emu.release --headless --record-logs all --record-videos failing --take-screenshots failing
 
       - name: Upload artifacts
