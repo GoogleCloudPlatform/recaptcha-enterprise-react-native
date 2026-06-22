@@ -100,7 +100,7 @@ jobs:
         uses: jlumbroso/free-disk-space@main
         with:
           android: false 
-          tool-cache: true
+          tool-cache: false
           dotnet: true 
           haskell: true 
           swap-storage: true 
