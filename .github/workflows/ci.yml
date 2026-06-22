@@ -48,7 +48,7 @@ jobs:
         run: yarn prepare
 
   test-android-e2e:
-    runs-on: macos-15
+    runs-on: ubuntu-22.04
 
     steps:
       - name: Checkout
@@ -85,26 +85,44 @@ jobs:
           cd example
           node -e "console.log('AVD_NAME=' + require('./.detoxrc').devices.emulator.device.avdName)" >> $GITHUB_OUTPUT
 
+      - name: Enable KVM group perms
+        run: |
+          echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
+          sudo udevadm control --reload-rules
+          sudo udevadm trigger --name-match=kvm
+
       - name: Detox build
         run: |
           cd example
           yarn detox build --configuration android.emu.release
 
+      - name: Delete unnecessary tools 🔧
+        uses: jlumbroso/free-disk-space@main
+        with:
+          android: false 
+          tool-cache: false
+          dotnet: true 
+          haskell: true 
+          swap-storage: true 
+          docker-images: false 
+          large-packages: false
+    
+      - run: df -h
+
       - name: Pre-install Android Emulator System Image
         run: |
           yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
-          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-28;google_apis;arm64-v8a" "system-images;android-28;default;arm64-v8a" || true
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-28;default;x86_64" || true
 
       - name: E2E test for Android
         uses: reactivecircus/android-emulator-runner@v2
         with:
           api-level: 28
-          target: google_apis
-          arch: arm64-v8a
+          arch: x86_64
           avd-name: ${{ steps.device.outputs.AVD_NAME }}
           force-avd-creation: false
           emulator-boot-timeout: 1800
-          emulator-options: -accel off -no-snapshot-save -no-window -gpu swiftshader_indirect -no-audio -no-boot-anim -camera-back none
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -no-audio -no-boot-anim -camera-back none
           disable-animations: true
           script: cd example && yarn detox test --configuration android.emu.release --headless --record-logs all --record-videos failing --take-screenshots failing
 
