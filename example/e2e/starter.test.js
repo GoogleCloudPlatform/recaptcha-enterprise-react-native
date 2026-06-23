@@ -12,7 +12,7 @@ describe('Example', () => {
     await element(by.id('initButtonId')).tap();
     await waitFor(element(by.id('initResultId')))
       .toHaveText('ok')
-      .withTimeout(25000);
+      .withTimeout(10000);
     await element(by.id('actionId')).replaceText('asdf $%');
     await element(by.id('executeButtonId')).tap();
     const errorMessage =
@@ -21,7 +21,7 @@ describe('Example', () => {
         : 'INVALID_ACTION Invalid action ';
     await waitFor(element(by.id('executeResultId')))
       .toHaveText(errorMessage)
-      .withTimeout(25000);
+      .withTimeout(10000);
     await expect(element(by.id('executeResultId'))).toHaveText(errorMessage);
   });
 
@@ -35,7 +35,7 @@ describe('Example', () => {
         : 'INVALID_SITEKEY Site key invali';
     await waitFor(element(by.id('initResultId')))
       .toHaveText(errorMessage)
-      .withTimeout(25000);
+      .withTimeout(10000);
     await expect(element(by.id('initResultId'))).toHaveText(errorMessage);
   });
 
@@ -44,7 +44,7 @@ describe('Example', () => {
     const errorMessage = 'RN_EXECUTE_FAILED Initialize clie';
     await waitFor(element(by.id('executeResultId')))
       .toHaveText(errorMessage)
-      .withTimeout(25000);
+      .withTimeout(10000);
     await expect(element(by.id('executeResultId'))).toHaveText(errorMessage);
   });
 
@@ -58,7 +58,7 @@ describe('Example', () => {
     await element(by.id('fetchClientButtonId')).tap();
     await waitFor(element(by.id('fetchClientResultId')))
       .toHaveText('ok')
-      .withTimeout(25000);
+      .withTimeout(10000);
     await expect(element(by.id('fetchClientResultId'))).toHaveText('ok');
   });
 
@@ -66,11 +66,11 @@ describe('Example', () => {
     await element(by.id('fetchClientButtonId')).tap();
     await waitFor(element(by.id('fetchClientResultId')))
       .toHaveText('ok')
-      .withTimeout(25000);
+      .withTimeout(10000);
     await element(by.id('clientExecuteButtonId')).tap();
     await waitFor(element(by.id('clientExecuteResultId')))
       .toHaveText('ok')
-      .withTimeout(25000);
+      .withTimeout(10000);
     await expect(element(by.id('clientExecuteResultId'))).toHaveText('ok');
   });
 
@@ -78,7 +78,7 @@ describe('Example', () => {
     await element(by.id('fetchClientButtonId')).tap();
     await waitFor(element(by.id('fetchClientResultId')))
       .toHaveText('ok')
-      .withTimeout(25000);
+      .withTimeout(10000);
     await element(by.id('actionId')).replaceText('asdf $%');
     await element(by.id('clientExecuteButtonId')).tap();
     const errorMessage =
@@ -87,7 +87,7 @@ describe('Example', () => {
         : 'INVALID_ACTION Invalid action ';
     await waitFor(element(by.id('clientExecuteResultId')))
       .toHaveText(errorMessage)
-      .withTimeout(25000);
+      .withTimeout(10000);
     await expect(element(by.id('clientExecuteResultId'))).toHaveText(
       errorMessage
     );
@@ -98,7 +98,7 @@ describe('Example', () => {
     await element(by.id('fetchClientButtonId')).tap();
     await waitFor(element(by.id('fetchClientResultId')))
       .toHaveText('ok')
-      .withTimeout(25000);
+      .withTimeout(10000);
     await element(by.id('clientExecuteButtonId')).tap();
 
     const errorMessage =
@@ -108,7 +108,7 @@ describe('Example', () => {
 
     await waitFor(element(by.id('executeResultId')))
       .toHaveText(errorMessage)
-      .withTimeout(25000);
+      .withTimeout(10000);
     await expect(element(by.id('executeResultId'))).toHaveText(errorMessage);
   });
 
@@ -116,7 +116,7 @@ describe('Example', () => {
     await element(by.id('clientExecuteButtonId')).tap();
     await waitFor(element(by.id('clientExecuteResultId')))
       .toHaveText('Recaptcha Client is undefined')
-      .withTimeout(25000);
+      .withTimeout(10000);
     await expect(element(by.id('clientExecuteResultId'))).toHaveText(
       'Recaptcha Client is undefined'
     );
