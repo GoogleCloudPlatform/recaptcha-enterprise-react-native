@@ -14,7 +14,6 @@ describe('Example', () => {
       .toHaveText('ok')
       .withTimeout(10000);
     await element(by.id('actionId')).replaceText('asdf $%');
-    await element(by.id('actionId')).tapReturnKey();
     await element(by.id('executeButtonId')).tap();
     const errorMessage =
       device.getPlatform() === 'ios'

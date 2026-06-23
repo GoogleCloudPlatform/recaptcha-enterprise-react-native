@@ -77,7 +77,7 @@ jobs:
         env:
           JAVA_OPTS: "-XX:MaxHeapSize=6g"
         run: |
-          yarn run build:android
+          yarn example build:android
       
       - name: Get device name
         id: device
@@ -100,7 +100,7 @@ jobs:
         uses: jlumbroso/free-disk-space@main
         with:
           android: false 
-          tool-cache: true
+          tool-cache: false
           dotnet: true 
           haskell: true 
           swap-storage: true 
@@ -108,7 +108,12 @@ jobs:
           large-packages: false
     
       - run: df -h
-      
+
+      - name: Pre-install Android Emulator System Image
+        run: |
+          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses || true
+          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-28;default;x86_64" || true
+
       - name: E2E test for Android
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -116,8 +121,9 @@ jobs:
           arch: x86_64
           avd-name: ${{ steps.device.outputs.AVD_NAME }}
           force-avd-creation: false
-          emulator-options: -no-snapshot-save -gpu swiftshader_indirect
-          disable-animations: false
+          emulator-boot-timeout: 1800
+          emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -no-audio -no-boot-anim -camera-back none
+          disable-animations: true
           script: cd example && yarn detox test --configuration android.emu.release --headless --record-logs all --record-videos failing --take-screenshots failing
 
       - name: Upload artifacts
@@ -176,7 +182,7 @@ jobs:
 
       - name: Build example for iOS
         run: |
-          yarn run build:ios
+          yarn example build:ios
     
       - name: Detox rebuild framework cache
         run: |
