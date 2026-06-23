@@ -1857,7 +1857,7 @@ PODS:
     - React-utils (= 0.87.0-nightly-20260622-27e83d0a9)
     - ReactNativeDependencies
   - ReactNativeDependencies (0.87.0-nightly-20260622-27e83d0a9)
-  - recaptcha-enterprise-react-native (18.9.0):
+  - recaptcha-enterprise-react-native (18.9.1):
     - hermes-engine
     - RCTRequired
     - RCTTypeSafety
@@ -1878,12 +1878,12 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - ReactNativeDependencies
-    - RecaptchaEnterprise (= 18.9.0)
+    - RecaptchaEnterprise (= 18.9.1)
     - Yoga
-  - RecaptchaEnterprise (18.9.0):
-    - RecaptchaEnterpriseSDK (= 18.9.0)
+  - RecaptchaEnterprise (18.9.1):
+    - RecaptchaEnterpriseSDK (= 18.9.1)
     - RecaptchaInterop (~> 101.0.0)
-  - RecaptchaEnterpriseSDK (18.9.0)
+  - RecaptchaEnterpriseSDK (18.9.1)
   - RecaptchaInterop (101.0.0)
   - Yoga (0.0.0)
 
@@ -2210,9 +2210,9 @@ SPEC CHECKSUMS:
   ReactCodegen: fb44e630086c780e632d5a6157522d3910838bf4
   ReactCommon: 162ac1d49c6cc4326384cb895933e68bbccd67ab
   ReactNativeDependencies: dd574bbfee500fda641ac699d9e539bf390aa5d4
-  recaptcha-enterprise-react-native: d73196f91699ea42d0a692e7989b0ab957b4b158
-  RecaptchaEnterprise: 217523c23045d7dd83ed8816c0ad854f44a87db7
-  RecaptchaEnterpriseSDK: 58c3879f458cf9795b610392efaed1cb60211933
+  recaptcha-enterprise-react-native: 4f78648b9e872188cf29a1e9582fb20087e5b966
+  RecaptchaEnterprise: a28429a5366cc0f687ac5e93a44c5caa2c685aa9
+  RecaptchaEnterpriseSDK: 72239ea30c486d9093918c7b31eb85629eff1a50
   RecaptchaInterop: 11e0b637842dfb48308d242afc3f448062325aba
   Yoga: 10658d448f5f9cf337298ca302fc90682999ab39
 
