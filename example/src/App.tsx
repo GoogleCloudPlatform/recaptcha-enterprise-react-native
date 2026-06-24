@@ -51,7 +51,10 @@ export default function App() {
   const [siteKey, setSiteKey] = React.useState<string>(configSiteKey);
 
   return (
-    <ScrollView keyboardShouldPersistTaps="handled">
+    <ScrollView
+      contentContainerStyle={styles.container}
+      keyboardShouldPersistTaps="handled"
+    >
       <Text>Action name:</Text>
       <TextInput
         testID="actionId"
