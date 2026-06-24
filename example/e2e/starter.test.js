@@ -2,7 +2,13 @@ import { by, device, expect, element, waitFor } from 'detox';
 
 describe('Example', () => {
   beforeEach(async () => {
-    await device.launchApp({ newInstance: true });
+    await device.launchApp({
+      newInstance: true,
+      launchArgs: { detoxEnableSynchronization: 0 },
+    });
+    await waitFor(element(by.id('actionId')))
+      .toBeVisible()
+      .withTimeout(5000);
     await element(by.id('actionId')).replaceText('login');
     await element(by.id('actionId')).tapReturnKey();
     await element(by.id('resetSiteKeyButtonId')).tap();

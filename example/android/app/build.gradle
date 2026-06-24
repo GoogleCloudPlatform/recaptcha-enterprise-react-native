@@ -140,7 +140,9 @@ dependencies {
     } else {
         implementation jscFlavor
     }
-    androidTestImplementation('com.wix:detox:+')
+    androidTestImplementation('com.wix:detox:+') {
+        exclude group: 'com.google.protobuf', module: 'protobuf-lite'
+    }
 }
 
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"

@@ -17,11 +17,12 @@ import Config from 'react-native-config';
 
 import {
   Button,
+  Keyboard,
   Platform,
+  ScrollView,
   StyleSheet,
   Text,
   TextInput,
-  View,
 } from 'react-native';
 import {
   execute,
@@ -50,9 +51,21 @@ export default function App() {
   const [siteKey, setSiteKey] = React.useState<string>(configSiteKey);
 
   return (
-    <View style={styles.container}>
+    <ScrollView
+      contentContainerStyle={styles.container}
+      keyboardShouldPersistTaps="handled"
+    >
       <Text>Action name:</Text>
-      <TextInput testID="actionId" onChangeText={setAction} value={action} />
+      <TextInput
+        testID="actionId"
+        caretHidden={true}
+        showSoftInputOnFocus={false}
+        onChangeText={(t) => {
+          setAction(t);
+          Keyboard.dismiss();
+        }}
+        value={action}
+      />
 
       <Text>SiteKey:</Text>
       <Button
@@ -62,7 +75,16 @@ export default function App() {
         title="Reset Site Key"
         testID="resetSiteKeyButtonId"
       />
-      <TextInput testID="siteKeyId" onChangeText={setSiteKey} value={siteKey} />
+      <TextInput
+        testID="siteKeyId"
+        caretHidden={true}
+        showSoftInputOnFocus={false}
+        onChangeText={(t) => {
+          setSiteKey(t);
+          Keyboard.dismiss();
+        }}
+        value={siteKey}
+      />
 
       <Button
         onPress={async () => {
@@ -150,7 +172,7 @@ export default function App() {
       <Text testID="executeResultId">{executeResult}</Text>
       <Text>Token:</Text>
       <Text testID="tokenId">{token}</Text>
-    </View>
+    </ScrollView>
   );
 }
 
