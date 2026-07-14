@@ -1,8 +1,11 @@
+## 18.9.2
+*   Update Android to '=18.9.2' and iOS to '[18.9.1', '18.9.2']
+
 ## 18.9.1
-*   Update Android and iOS to '=18.9.1' and '[18.9.1,18.9.1]'
+*   Update Android and iOS to '=18.9.1'
 
 ## 18.9.0
-*   Update Android and iOS to '=18.9.0' and '[18.9.0,18.9.0]'
+*   Update Android and iOS to '=18.9.0'
 
 ## 18.8.2
 *   Update iOS to '=18.8.2' and Android to '[18.8.0,18.8.2]'
