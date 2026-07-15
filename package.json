@@ -1,6 +1,6 @@
 {
   "name": "@google-cloud/recaptcha-enterprise-react-native",
-  "version": "18.9.1",
+  "version": "18.9.2",
   "description": "React Native plugin for reCAPTCHA Enterprise Mobile SDK",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
@@ -74,7 +74,7 @@
     "prettier": "^3.0.3",
     "react": "19.2.0",
     "react-native": "0.87.0-nightly-20260622-27e83d0a9",
-    "react-native-builder-bob": "^0.23.2",
+    "react-native-builder-bob": "^0.40.17",
     "release-it": "^15.0.0",
     "turbo": "^2.9.14",
     "typescript": "^5.2.2"
@@ -135,6 +135,7 @@
       "prettier"
     ],
     "rules": {
+      "react/no-unstable-nested-components": "off",
       "prettier/prettier": [
         "error",
         {
