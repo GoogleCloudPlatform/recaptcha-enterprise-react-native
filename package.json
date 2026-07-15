@@ -135,6 +135,7 @@
       "prettier"
     ],
     "rules": {
+      "react/no-unstable-nested-components": "off",
       "prettier/prettier": [
         "error",
         {
