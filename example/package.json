@@ -10,6 +10,7 @@
     "build:ios": "cd ios && xcodebuild -workspace RecaptchaEnterpriseReactNativeExample.xcworkspace -scheme RecaptchaEnterpriseReactNativeExample -configuration Debug -sdk iphonesimulator CC=clang CPLUSPLUS=clang++ LD=clang LDPLUSPLUS=clang++ GCC_OPTIMIZATION_LEVEL=0 GCC_PRECOMPILE_PREFIX_HEADER=YES ASSETCATALOG_COMPILER_OPTIMIZATION=time DEBUG_INFORMATION_FORMAT=dwarf COMPILER_INDEX_STORE_ENABLE=NO"
   },
   "dependencies": {
+    "@google-cloud/recaptcha-enterprise-react-native": "workspace:^",
     "@types/jest": "^29.5.12",
     "react": "19.2.0",
     "react-native": "0.87.0-nightly-20260622-27e83d0a9",
@@ -33,7 +34,7 @@
     "detox": "^20.47.0",
     "jest": "^30.2.0",
     "jest-cli": "^30.2.0",
-    "react-native-builder-bob": "^0.40.17"
+    "react-native-builder-bob": "latest"
   },
   "engines": {
     "node": ">=20"
