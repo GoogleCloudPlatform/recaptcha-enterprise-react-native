@@ -35,6 +35,7 @@ def isNewArchitectureEnabled() {
 }
 
 apply plugin: "com.android.library"
+apply plugin: "kotlin-android"
 
 // Remove per: https://github.com/callstack/react-native-builder-bob/issues/774#issuecomment-2674585468
 /*if (isNewArchitectureEnabled()) {
@@ -109,6 +110,6 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation 'com.google.android.recaptcha:recaptcha:18.9.2'
+  implementation 'com.google.android.recaptcha:recaptcha:[18.8.0,18.8.2]'
 }
 
