@@ -60,7 +60,7 @@ export default function App() {
         testID="actionId"
         caretHidden={true}
         showSoftInputOnFocus={false}
-        onChangeText={(t) => {
+        onChangeText={(t: string) => {
           setAction(t);
           Keyboard.dismiss();
         }}
@@ -79,7 +79,7 @@ export default function App() {
         testID="siteKeyId"
         caretHidden={true}
         showSoftInputOnFocus={false}
-        onChangeText={(t) => {
+        onChangeText={(t: string) => {
           setSiteKey(t);
           Keyboard.dismiss();
         }}
