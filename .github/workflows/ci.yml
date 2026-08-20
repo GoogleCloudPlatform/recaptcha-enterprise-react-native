@@ -7,12 +7,22 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   lint:
+    name: lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
 
       - name: Setup
         uses: ./.github/actions/setup
@@ -24,10 +34,13 @@ jobs:
         run: yarn typecheck
 
   test:
+    name: test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
 
       - name: Setup
         uses: ./.github/actions/setup
@@ -36,10 +49,13 @@ jobs:
         run: yarn test --maxWorkers=2 --coverage
 
   build-library:
+    name: build-library
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
 
       - name: Setup
         uses: ./.github/actions/setup
@@ -48,17 +64,20 @@ jobs:
         run: yarn prepare
 
   test-android-e2e:
+    name: test-android-e2e
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
 
       - name: Setup
         uses: ./.github/actions/setup
 
       - name: Setup Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@3a4f6e1af504cf6a31855fa899c6aa5355ba6c12 # v4.7.0
         with:
           cache: 'gradle'
           distribution: temurin
@@ -97,7 +116,7 @@ jobs:
           yarn detox build --configuration android.emu.release
 
       - name: Delete unnecessary tools 🔧
-        uses: jlumbroso/free-disk-space@main
+        uses: jlumbroso/free-disk-space@54081f138730dfa15788a46383842cd2f914a1be # v1.3.1
         with:
           android: false 
           tool-cache: false
@@ -115,7 +134,7 @@ jobs:
           $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "system-images;android-28;default;x86_64" || true
 
       - name: E2E test for Android
-        uses: reactivecircus/android-emulator-runner@v2
+        uses: reactivecircus/android-emulator-runner@a421e43855164a8197daf9d8d40fe71c6996bb0d # v2.38.0
         with:
           api-level: 28
           arch: x86_64
@@ -128,24 +147,27 @@ jobs:
 
       - name: Upload artifacts
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
         with:
           name: detox-artifacts
           path: example/artifacts
           retention-days: 5
 
   test-ios-e2e:
+    name: test-ios-e2e
     runs-on: macos-15-xlarge
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
 
       - name: Setup
         uses: ./.github/actions/setup
       
       - name: Select xcode version
-        uses: maxim-lobanov/setup-xcode@v1
+        uses: maxim-lobanov/setup-xcode@60606e260d2fc5762a71e64e74b2174e8ea3c8bd # v1.6.0
         with:
           xcode-version: '16.4'
 
@@ -162,19 +184,17 @@ jobs:
         run: echo "$EXAMPLE_ENV" >> example/.env
 
       - name: Cache XCode Derived Data
-        uses: irgaly/xcode-cache@v1
+        uses: irgaly/xcode-cache@282e57619a58eb57a2374be91df1798d46703bfd # v1.2.1
         with:
           key: xcode-cache-deriveddata-${{ github.workflow }}-${{ github.sha }}
           restore-keys: xcode-cache-deriveddata-${{ github.workflow }}-
 
       - name: Cache Example CocoaPods
         id: cache-example-cocoapods
-        uses: actions/cache@v3
+        uses: actions/cache@d4323d4df104b026a6aa633fdb11d772146be0bf # v4.2.2
         with:
           path: example/ios/Pods
           key: ${{ runner.os }}-example-pods-${{ hashFiles('example/ios/Podfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-example-pods-
 
       - name: Install Example CocoaPods # Need to still run pod install even with cache
         run: cd example/ios ; pod install
@@ -201,7 +221,7 @@ jobs:
 
       - name: Upload artifacts
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@4cec3d8aa04e39d1a68397de0c4cd6fb9dce8ec1 # v4.6.1
         with:
           name: detox-artifacts
           path: example/artifacts
