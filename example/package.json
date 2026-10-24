@@ -7,7 +7,11 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "build:android": "cd android && ./gradlew assembleDebug --no-daemon --console=plain -PreactNativeArchitectures=arm64-v8a",
-    "build:ios": "cd ios && xcodebuild -workspace RecaptchaEnterpriseReactNativeExample.xcworkspace -scheme RecaptchaEnterpriseReactNativeExample -configuration Debug -sdk iphonesimulator CC=clang CPLUSPLUS=clang++ LD=clang LDPLUSPLUS=clang++ GCC_OPTIMIZATION_LEVEL=0 GCC_PRECOMPILE_PREFIX_HEADER=YES ASSETCATALOG_COMPILER_OPTIMIZATION=time DEBUG_INFORMATION_FORMAT=dwarf COMPILER_INDEX_STORE_ENABLE=NO"
+    "build:ios": "cd ios && xcodebuild -workspace RecaptchaEnterpriseReactNativeExample.xcworkspace -scheme RecaptchaEnterpriseReactNativeExample -configuration Debug -sdk iphonesimulator CC=clang CPLUSPLUS=clang++ LD=clang LDPLUSPLUS=clang++ GCC_OPTIMIZATION_LEVEL=0 GCC_PRECOMPILE_PREFIX_HEADER=YES ASSETCATALOG_COMPILER_OPTIMIZATION=time DEBUG_INFORMATION_FORMAT=dwarf COMPILER_INDEX_STORE_ENABLE=NO",
+    "pods": "cd ios && rm -rf RecaptchaEnterpriseReactNativeExample.xcworkspace/xcshareddata/swiftpm && USE_SPM=0 pod install",
+    "spm": "cd ios && USE_SPM=1 pod install",
+    "build:ios:pods": "yarn pods && yarn build:ios",
+    "build:ios:spm": "yarn spm && yarn build:ios"
   },
   "dependencies": {
     "@google-cloud/recaptcha-enterprise-react-native": "workspace:^",

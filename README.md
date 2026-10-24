@@ -49,6 +49,16 @@ Podfile:
 flipper_config = FlipperConfiguration.disabled
 ```
 
+#### Swift Package Manager (SPM)
+
+By default, the iOS native SDK (`RecaptchaEnterprise`) is installed via CocoaPods. On React Native versions that support `spm_dependency` (React Native 0.75+), you can opt in to resolving the native `RecaptchaEnterprise` iOS SDK via Swift Package Manager instead by setting `USE_SPM=1` (or `RECAPTCHA_USE_SPM=1`) when running `pod install`:
+
+```bash
+USE_SPM=1 pod install
+```
+
+Or by setting `ENV['RECAPTCHA_USE_SPM'] = '1'` at the top of your `ios/Podfile`.
+
 ## Basic Usage
 
 This section shows how to integrate with reCAPTCHA SDK.
