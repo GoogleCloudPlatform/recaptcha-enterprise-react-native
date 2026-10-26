@@ -88,6 +88,22 @@ From the repository root, install prerequisites running the command:
 npx yarn install && cd example && npx yarn install && cd ios && pod install
 ```
 
+### Switching between CocoaPods and Swift Package Manager (SPM)
+
+You can switch the example app's iOS native `RecaptchaEnterprise` dependency between CocoaPods and Swift Package Manager at any time:
+
+```bash
+# Switch to Swift Package Manager (SPM)
+yarn example spm
+
+# Switch back to CocoaPods
+yarn example pods
+
+# Switch and build the iOS example app in one command
+yarn example build:ios:spm
+yarn example build:ios:pods
+```
+
 ### Run sample app:
 
 ```bash
