@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
       products: ['RecaptchaEnterprise']
     )
   else
-    s.dependency 'RecaptchaEnterprise', '>=18.9.1', '<=18.9.2'
+    s.dependency 'RecaptchaEnterprise', '>=18.9.1', '<=18.9.3'
   end
   s.static_framework = true
 
