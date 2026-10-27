@@ -16,7 +16,16 @@ Pod::Spec.new do |s|
 
   s.source_files = "ios/**/*.{h,m,mm,swift}"
 
-  s.dependency 'RecaptchaEnterprise', '>=18.9.1', '<=18.9.2'
+  use_spm = ENV['RECAPTCHA_USE_SPM'] == '1' || ENV['USE_SPM'] == '1'
+  if use_spm && respond_to?(:spm_dependency, true)
+    spm_dependency(s,
+      url: 'https://github.com/GoogleCloudPlatform/recaptcha-enterprise-mobile-sdk.git',
+      requirement: {kind: 'upToNextMinorVersion', minimumVersion: '18.9.1'},
+      products: ['RecaptchaEnterprise']
+    )
+  else
+    s.dependency 'RecaptchaEnterprise', '>=18.9.1', '<=18.9.3'
+  end
   s.static_framework = true
 
   # Use install_modules_dependencies helper to install the dependencies if React Native version >=0.71.0.

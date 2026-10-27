@@ -1,3 +1,7 @@
+## 18.9.3
+*   Update Android to '=18.9.3' and iOS to '[18.9.1', '18.9.3']
+*   Add experimental Swift Package Manager (SPM) support for iOS
+
 ## 18.9.2
 *   Update Android to '=18.9.2' and iOS to '[18.9.1', '18.9.2']
 
