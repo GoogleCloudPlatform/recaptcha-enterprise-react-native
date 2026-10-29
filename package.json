@@ -50,7 +50,7 @@
   },
   "homepage": "https://github.com/GoogleCloudPlatform/recaptcha-enterprise-react-native#readme",
   "publishConfig": {
-    "registry": "https://wombat-dressing-room.appspot.com"
+    "registry": "https://us-npm.pkg.dev/oss-exit-gate-prod/recaptcha-react-native--npm/"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^17.0.2",
@@ -120,6 +120,10 @@
       "@release-it/conventional-changelog": {
         "preset": "angular"
       }
+    },
+    "hooks": {
+      "before:npm:release": "gcloud artifacts packages delete \"@google-cloud/recaptcha-enterprise-react-native\" --project=oss-exit-gate-prod --repository=recaptcha-react-native--npm --location=us --quiet 2>/dev/null || true; npx --yes google-artifactregistry-auth --repo-config=.npmrc --credential-config=$HOME/.npmrc",
+      "after:npm:release": "printf '{\"publish_all\":false,\"publishing_groups\":[{\"namespace\":\"@google-cloud\",\"packages\":[{\"name\":\"recaptcha-enterprise-react-native\",\"version\":\"${version}\"}]}]}\\n' > /tmp/exit-gate-manifest-${version}.json && gcloud storage cp /tmp/exit-gate-manifest-${version}.json gs://oss-exit-gate-prod-projects-bucket/recaptcha-react-native/npm/manifests/manifest-${version}-$(date +%s).json"
     }
   },
   "eslintConfig": {
