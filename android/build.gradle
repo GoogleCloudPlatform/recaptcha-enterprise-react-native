@@ -36,6 +36,16 @@ def isNewArchitectureEnabled() {
 
 apply plugin: "com.android.library"
 
+// AGP 9 compiles Kotlin itself unless android.builtInKotlin=false, and every other setup needs the plugin.
+def agpMajor = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION.tokenize(".")[0].toInteger()
+if (agpMajor < 9 || project.findProperty("android.builtInKotlin") == "false") {
+  apply plugin: "kotlin-android"
+  // The SDK is built with a newer Kotlin than these setups use, and this module only calls its public API.
+  tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    compilerOptions.freeCompilerArgs.add("-Xskip-metadata-version-check")
+  }
+}
+
 // Remove per: https://github.com/callstack/react-native-builder-bob/issues/774#issuecomment-2674585468
 /*if (isNewArchitectureEnabled()) {
   apply plugin: "com.facebook.react"
@@ -107,5 +117,7 @@ dependencies {
   implementation "com.facebook.react:react-native:+"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
   implementation 'com.google.android.recaptcha:recaptcha:18.9.3'
+  // The SDK calls Job.cancel$default, which kotlinx-coroutines only has from 1.11.0.
+  implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.11.0"
 }
 
