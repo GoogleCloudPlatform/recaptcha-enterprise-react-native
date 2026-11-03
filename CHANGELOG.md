@@ -1,5 +1,6 @@
 ## 18.9.4
 *   Update Android to '=18.9.4' and iOS to '[18.9.1', '18.9.4']
+*   Require React Native >=0.87.0 and support Android builds with default RN Kotlin 2.2 or `android.builtInKotlin=false`
 
 ## 18.9.3
 *   Update Android to '=18.9.3' and iOS to '[18.9.1', '18.9.3']

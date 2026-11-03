@@ -36,6 +36,14 @@ def isNewArchitectureEnabled() {
 
 apply plugin: "com.android.library"
 
+if (project.findProperty("android.builtInKotlin") == "false") {
+  apply plugin: "kotlin-android"
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+  compilerOptions.freeCompilerArgs.add("-Xskip-metadata-version-check")
+}
+
 // Remove per: https://github.com/callstack/react-native-builder-bob/issues/774#issuecomment-2674585468
 /*if (isNewArchitectureEnabled()) {
   apply plugin: "com.facebook.react"
