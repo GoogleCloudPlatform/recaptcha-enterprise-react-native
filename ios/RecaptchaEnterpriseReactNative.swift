@@ -50,6 +50,8 @@ class RecaptchaEnterpriseReactNative: NSObject {
             return
           }
           reject(String(error.errorCode.rawValue), error.errorMessage, nil)
+        } else {
+          reject("RN_UNKNOWN_ERROR", "Unknown error", nil)
         }
     }
   }
@@ -101,6 +103,8 @@ class RecaptchaEnterpriseReactNative: NSObject {
           return
         }
         reject(String(error.errorCode.rawValue), error.errorMessage, nil)
+      } else {
+        reject("RN_UNKNOWN_ERROR", "Unknown error", nil)
       }
     }
 

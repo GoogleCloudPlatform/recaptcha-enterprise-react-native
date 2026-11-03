@@ -12,4 +12,97 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-it.todo('write a test');
+import { NativeModules } from 'react-native';
+import { execute, initClient, Recaptcha, RecaptchaAction } from '../index';
+
+jest.mock('react-native', () => ({
+  Platform: {
+    select: jest.fn((obj) => obj.default ?? ''),
+  },
+  NativeModules: {
+    RecaptchaEnterpriseReactNative: {
+      fetchClient: jest.fn(),
+      initClient: jest.fn(),
+      execute: jest.fn(),
+    },
+  },
+}));
+
+const mockNative = NativeModules.RecaptchaEnterpriseReactNative;
+
+describe('RecaptchaAction', () => {
+  it('creates standard LOGIN and SIGNUP actions', () => {
+    expect(RecaptchaAction.LOGIN().action).toBe('login');
+    expect(RecaptchaAction.SIGNUP().action).toBe('signup');
+  });
+
+  it('creates custom actions', () => {
+    expect(RecaptchaAction.custom('checkout').action).toBe('checkout');
+  });
+});
+
+describe('Recaptcha.fetchClient and RecaptchaClient.execute', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('fetches a client and executes an action without timeout', async () => {
+    mockNative.fetchClient.mockResolvedValueOnce(null);
+    mockNative.execute.mockResolvedValueOnce('token-123');
+
+    const client = await Recaptcha.fetchClient('site-key-1');
+    expect(mockNative.fetchClient).toHaveBeenCalledWith('site-key-1');
+
+    const token = await client.execute(RecaptchaAction.LOGIN());
+    expect(mockNative.execute).toHaveBeenCalledWith('login', {});
+    expect(token).toBe('token-123');
+  });
+
+  it('passes timeout (including 0) when provided to client.execute', async () => {
+    mockNative.fetchClient.mockResolvedValueOnce(null);
+    mockNative.execute.mockResolvedValue('token-456');
+
+    const client = await Recaptcha.fetchClient('site-key-1');
+
+    await client.execute(RecaptchaAction.SIGNUP(), 5000);
+    expect(mockNative.execute).toHaveBeenCalledWith('signup', {
+      timeout: 5000,
+    });
+
+    await client.execute(RecaptchaAction.custom(' zero '), 0);
+    expect(mockNative.execute).toHaveBeenCalledWith(' zero ', {
+      timeout: 0,
+    });
+  });
+});
+
+describe('deprecated initClient and execute', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('calls native initClient with and without timeout', async () => {
+    mockNative.initClient.mockResolvedValue('ok');
+
+    await initClient('site-key-2');
+    expect(mockNative.initClient).toHaveBeenCalledWith('site-key-2', {});
+
+    await initClient('site-key-2', 10000);
+    expect(mockNative.initClient).toHaveBeenCalledWith('site-key-2', {
+      timeout: 10000,
+    });
+  });
+
+  it('calls native execute with and without timeout', async () => {
+    mockNative.execute.mockResolvedValue('legacy-token');
+
+    const token1 = await execute(RecaptchaAction.LOGIN());
+    expect(mockNative.execute).toHaveBeenCalledWith('login', {});
+    expect(token1).toBe('legacy-token');
+
+    await execute(RecaptchaAction.SIGNUP(), 3000);
+    expect(mockNative.execute).toHaveBeenCalledWith('signup', {
+      timeout: 3000,
+    });
+  });
+});
