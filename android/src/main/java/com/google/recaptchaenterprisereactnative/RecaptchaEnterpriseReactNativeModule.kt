@@ -79,10 +79,7 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
           promise.reject("RN_CANCELLED", "Operation cancelled", e)
           throw e
         }
-      } catch (exception: Throwable) {
-        if (exception is VirtualMachineError) {
-          throw exception
-        }
+      } catch (exception: Exception) {
         rejectWithException(promise, exception)
       }
     }
@@ -116,10 +113,7 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
           promise.reject("RN_CANCELLED", "Operation cancelled", e)
           throw e
         }
-      } catch (exception: Throwable) {
-        if (exception is VirtualMachineError) {
-          throw exception
-        }
+      } catch (exception: Exception) {
         rejectWithException(promise, exception)
       }
     }
@@ -159,10 +153,7 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
           promise.reject("RN_CANCELLED", "Operation cancelled", e)
           throw e
         }
-      } catch (exception: Throwable) {
-        if (exception is VirtualMachineError) {
-          throw exception
-        }
+      } catch (exception: Exception) {
         rejectWithException(promise, exception)
       }
     }
