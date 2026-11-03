@@ -30,6 +30,7 @@ import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext) :
@@ -57,7 +58,11 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
     if (exception is RecaptchaException) {
       promise.reject(exception.errorCode.toString(), exception.errorMessage, exception)
     } else {
-      promise.reject(exception)
+      promise.reject(
+        "RN_UNKNOWN_ERROR",
+        exception.message ?: exception.toString(),
+        exception
+      )
     }
   }
   
@@ -68,8 +73,16 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
         recaptchaClient = Recaptcha.fetchClient(application, siteKey)
         promise.resolve(null)
       } catch (e: CancellationException) {
-        throw e
+        if (isActive) {
+          rejectWithException(promise, e)
+        } else {
+          promise.reject("RN_CANCELLED", "Operation cancelled", e)
+          throw e
+        }
       } catch (exception: Throwable) {
+        if (exception is VirtualMachineError) {
+          throw exception
+        }
         rejectWithException(promise, exception)
       }
     }
@@ -81,7 +94,7 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
     recaptchaModuleScope.launch {
       try {
         let {
-          if (arguments.hasKey("timeout")) {
+          if (arguments.hasKey("timeout") && !arguments.isNull("timeout")) {
             // JS+ReadableMap have no support for long
             val timeout = arguments.getDouble("timeout").toLong()
             Recaptcha.getClient(application, siteKey, timeout)
@@ -97,8 +110,16 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
           rejectWithException(promise, exception)
         }
       } catch (e: CancellationException) {
-        throw e
+        if (isActive) {
+          rejectWithException(promise, e)
+        } else {
+          promise.reject("RN_CANCELLED", "Operation cancelled", e)
+          throw e
+        }
       } catch (exception: Throwable) {
+        if (exception is VirtualMachineError) {
+          throw exception
+        }
         rejectWithException(promise, exception)
       }
     }
@@ -117,7 +138,7 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
       try {
         recaptchaClient
         .let {
-          if (arguments.hasKey("timeout")) {
+          if (arguments.hasKey("timeout") && !arguments.isNull("timeout")) {
             // JS+ReadableMap have no support for long
             val timeout = arguments.getDouble("timeout").toLong()
             it.execute(action, timeout)
@@ -132,8 +153,16 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
           rejectWithException(promise, exception)
         }
       } catch (e: CancellationException) {
-        throw e
+        if (isActive) {
+          rejectWithException(promise, e)
+        } else {
+          promise.reject("RN_CANCELLED", "Operation cancelled", e)
+          throw e
+        }
       } catch (exception: Throwable) {
+        if (exception is VirtualMachineError) {
+          throw exception
+        }
         rejectWithException(promise, exception)
       }
     }

@@ -1,7 +1,9 @@
 ## 18.9.4
+*   **Breaking Change**: Require `react-native >= 0.87.0` in `peerDependencies`.
 *   Update Android to '=18.9.4' and iOS to '[18.9.1', '18.9.4']
-*   Require React Native >=0.87.0 and support Android builds with default RN Kotlin 2.2 or `android.builtInKotlin=false`
+*   Support Android builds with default RN Kotlin 2.2 or `android.builtInKotlin=false`
 *   Improve native error handling and promise resolution on Android and iOS
+*   Forward `timeout = 0` to the native SDK instead of omitting it (while continuing to ignore `null`/`undefined`)
 
 ## 18.9.3
 *   Update Android to '=18.9.3' and iOS to '[18.9.1', '18.9.3']

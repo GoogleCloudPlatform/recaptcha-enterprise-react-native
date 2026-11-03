@@ -43,7 +43,7 @@ describe('RecaptchaAction', () => {
 
 describe('Recaptcha.fetchClient and RecaptchaClient.execute', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    jest.resetAllMocks();
   });
 
   it('fetches a client and executes an action without timeout', async () => {
@@ -58,7 +58,7 @@ describe('Recaptcha.fetchClient and RecaptchaClient.execute', () => {
     expect(token).toBe('token-123');
   });
 
-  it('passes timeout (including 0) when provided to client.execute', async () => {
+  it('passes timeout (including 0) and omits null/undefined when provided to client.execute', async () => {
     mockNative.fetchClient.mockResolvedValueOnce(null);
     mockNative.execute.mockResolvedValue('token-456');
 
@@ -73,15 +73,36 @@ describe('Recaptcha.fetchClient and RecaptchaClient.execute', () => {
     expect(mockNative.execute).toHaveBeenCalledWith(' zero ', {
       timeout: 0,
     });
+
+    await client.execute(
+      RecaptchaAction.LOGIN(),
+      null as unknown as number | undefined
+    );
+    expect(mockNative.execute).toHaveBeenLastCalledWith('login', {});
+  });
+
+  it('propagates native rejections from fetchClient and client.execute', async () => {
+    mockNative.fetchClient.mockRejectedValueOnce(new Error('INVALID_SITEKEY'));
+    await expect(Recaptcha.fetchClient('bad-key')).rejects.toThrow(
+      'INVALID_SITEKEY'
+    );
+
+    mockNative.fetchClient.mockResolvedValueOnce(null);
+    const client = await Recaptcha.fetchClient('site-key-1');
+
+    mockNative.execute.mockRejectedValueOnce(new Error('INVALID_ACTION'));
+    await expect(
+      client.execute(RecaptchaAction.custom('bad action'))
+    ).rejects.toThrow('INVALID_ACTION');
   });
 });
 
 describe('deprecated initClient and execute', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    jest.resetAllMocks();
   });
 
-  it('calls native initClient with and without timeout', async () => {
+  it('calls native initClient with timeout (including 0) and omits null/undefined', async () => {
     mockNative.initClient.mockResolvedValue('ok');
 
     await initClient('site-key-2');
@@ -91,9 +112,17 @@ describe('deprecated initClient and execute', () => {
     expect(mockNative.initClient).toHaveBeenCalledWith('site-key-2', {
       timeout: 10000,
     });
+
+    await initClient('site-key-2', 0);
+    expect(mockNative.initClient).toHaveBeenCalledWith('site-key-2', {
+      timeout: 0,
+    });
+
+    await initClient('site-key-2', null as unknown as number | undefined);
+    expect(mockNative.initClient).toHaveBeenLastCalledWith('site-key-2', {});
   });
 
-  it('calls native execute with and without timeout', async () => {
+  it('calls native execute with timeout (including 0) and omits null/undefined', async () => {
     mockNative.execute.mockResolvedValue('legacy-token');
 
     const token1 = await execute(RecaptchaAction.LOGIN());
@@ -104,5 +133,16 @@ describe('deprecated initClient and execute', () => {
     expect(mockNative.execute).toHaveBeenCalledWith('signup', {
       timeout: 3000,
     });
+
+    await execute(RecaptchaAction.SIGNUP(), 0);
+    expect(mockNative.execute).toHaveBeenCalledWith('signup', {
+      timeout: 0,
+    });
+
+    await execute(
+      RecaptchaAction.SIGNUP(),
+      null as unknown as number | undefined
+    );
+    expect(mockNative.execute).toHaveBeenLastCalledWith('signup', {});
   });
 });

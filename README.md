@@ -16,6 +16,9 @@ and
 
 ## Setup
 
+> [!IMPORTANT]
+> Version `18.9.4` and later require **React Native `>=0.87.0`**.
+
 Add the package to your React Native project:
 
 ```bash
