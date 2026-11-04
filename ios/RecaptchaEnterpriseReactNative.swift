@@ -45,17 +45,11 @@ class RecaptchaEnterpriseReactNative: NSObject {
           self.recaptchaClient = recaptchaClient
           resolve(nil)
         } else if let error = error {
-          guard let recaptchaError = error as? RecaptchaError else {
-            reject("RN_CAST_ERROR", "Not a RecaptchaError", error as NSError)
+          guard let error = error as? RecaptchaError else {
+            reject("RN_CAST_ERROR", "Not a RecaptchaError", nil)
             return
           }
-          reject(
-            String(recaptchaError.errorCode.rawValue),
-            recaptchaError.errorMessage,
-            recaptchaError
-          )
-        } else {
-          reject("RN_UNKNOWN_ERROR", "Unknown error", error as NSError?)
+          reject(String(error.errorCode.rawValue), error.errorMessage, nil)
         }
     }
   }
@@ -102,17 +96,11 @@ class RecaptchaEnterpriseReactNative: NSObject {
       if let token = token {
         resolve(token)
       } else if let error = error {
-        guard let recaptchaError = error as? RecaptchaError else {
-          reject("RN_CAST_ERROR", "Not a RecaptchaError", error as NSError)
+        guard let error = error as? RecaptchaError else {
+          reject("RN_CAST_ERROR", "Not a RecaptchaError", nil)
           return
         }
-        reject(
-          String(recaptchaError.errorCode.rawValue),
-          recaptchaError.errorMessage,
-          recaptchaError
-        )
-      } else {
-        reject("RN_UNKNOWN_ERROR", "Unknown error", error as NSError?)
+        reject(String(error.errorCode.rawValue), error.errorMessage, nil)
       }
     }
 

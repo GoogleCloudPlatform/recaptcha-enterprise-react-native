@@ -46,7 +46,7 @@ export class Recaptcha {
 export function initClient(siteKey: string, timeout?: number): Promise<string> {
   let args: Args = {};
 
-  if (timeout != null) {
+  if (timeout) {
     args.timeout = timeout;
   }
 
@@ -65,7 +65,7 @@ export function execute(
 ): Promise<string> {
   let args: Args = {};
 
-  if (timeout != null) {
+  if (timeout) {
     args.timeout = timeout;
   }
 
