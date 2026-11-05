@@ -19,7 +19,7 @@ export class RecaptchaClientImpl implements RecaptchaClient {
   execute(action: RecaptchaAction, timeout?: number): Promise<string> {
     let args: Args = {};
 
-    if (timeout) {
+    if (timeout != null) {
       args.timeout = timeout;
     }
 
