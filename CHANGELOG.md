@@ -1,3 +1,8 @@
+## 18.9.4
+*   **Breaking Change**: Require `react-native >= 0.87.0` in `peerDependencies`.
+*   Update Android to '=18.9.4' and iOS to '[18.9.1', '18.9.4']
+*   Support Android builds with default RN Kotlin 2.2 or `android.builtInKotlin=false`
+
 ## 18.9.3
 *   Update Android to '=18.9.3' and iOS to '[18.9.1', '18.9.3']
 *   Add experimental Swift Package Manager (SPM) support for iOS

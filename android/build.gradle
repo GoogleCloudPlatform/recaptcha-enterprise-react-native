@@ -36,6 +36,21 @@ def isNewArchitectureEnabled() {
 
 apply plugin: "com.android.library"
 
+def agpMajorVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION.tokenize('.')[0].toInteger()
+def builtInKotlinProp = project.findProperty("android.builtInKotlin")?.toString()
+def hasBuiltInKotlin = (agpMajorVersion >= 9 && builtInKotlinProp != "false") || builtInKotlinProp == "true"
+if (!hasBuiltInKotlin && !project.pluginManager.hasPlugin("org.jetbrains.kotlin.android")) {
+  apply plugin: "kotlin-android"
+}
+
+// com.google.android.recaptcha:recaptcha:18.9.4 is compiled with Kotlin 2.4.x metadata,
+// whereas React Native 0.87 ships Kotlin 2.2.0 (which by default only reads up to 2.3.x metadata).
+// This flag is scoped only to this wrapper module so it can compile against the Recaptcha AAR
+// until the upstream Android SDK sets a lower apiVersion/languageVersion or RN bumps Kotlin.
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+  compilerOptions.freeCompilerArgs.add("-Xskip-metadata-version-check")
+}
+
 // Remove per: https://github.com/callstack/react-native-builder-bob/issues/774#issuecomment-2674585468
 /*if (isNewArchitectureEnabled()) {
   apply plugin: "com.facebook.react"
@@ -106,6 +121,6 @@ dependencies {
   //noinspection GradleDynamicVersion
   implementation "com.facebook.react:react-native:+"
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-  implementation 'com.google.android.recaptcha:recaptcha:18.9.3'
+  implementation 'com.google.android.recaptcha:recaptcha:18.9.4'
 }
 
