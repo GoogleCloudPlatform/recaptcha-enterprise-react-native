@@ -26,11 +26,9 @@ import com.google.android.recaptcha.Recaptcha
 import com.google.android.recaptcha.RecaptchaAction
 import com.google.android.recaptcha.RecaptchaClient
 import com.google.android.recaptcha.RecaptchaException
-import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext) :
@@ -72,13 +70,6 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
       try {
         recaptchaClient = Recaptcha.fetchClient(application, siteKey)
         promise.resolve(null)
-      } catch (e: CancellationException) {
-        if (isActive) {
-          rejectWithException(promise, e)
-        } else {
-          promise.reject("RN_CANCELLED", "Operation cancelled", e)
-          throw e
-        }
       } catch (exception: Exception) {
         rejectWithException(promise, exception)
       }
@@ -105,13 +96,6 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
         }
         .onFailure { exception ->
           rejectWithException(promise, exception)
-        }
-      } catch (e: CancellationException) {
-        if (isActive) {
-          rejectWithException(promise, e)
-        } else {
-          promise.reject("RN_CANCELLED", "Operation cancelled", e)
-          throw e
         }
       } catch (exception: Exception) {
         rejectWithException(promise, exception)
@@ -145,13 +129,6 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
         }
         .onFailure { exception ->
           rejectWithException(promise, exception)
-        }
-      } catch (e: CancellationException) {
-        if (isActive) {
-          rejectWithException(promise, e)
-        } else {
-          promise.reject("RN_CANCELLED", "Operation cancelled", e)
-          throw e
         }
       } catch (exception: Exception) {
         rejectWithException(promise, exception)
