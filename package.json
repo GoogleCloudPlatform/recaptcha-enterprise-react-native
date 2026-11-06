@@ -32,7 +32,7 @@
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "clean": "del-cli android/build example/android/build example/android/app/build example/ios/build lib",
     "prepare": "npx bob build",
-    "release": "release-it"
+    "release": "yarn prepare && release-it --no-increment"
   },
   "keywords": [
     "react-native",
@@ -106,22 +106,12 @@
     ]
   },
   "release-it": {
-    "git": {
-      "commitMessage": "chore: release ${version}",
-      "tagName": "v${version}"
-    },
+    "git": false,
     "npm": {
       "publish": true,
       "skipChecks": true
     },
-    "github": {
-      "release": true
-    },
-    "plugins": {
-      "@release-it/conventional-changelog": {
-        "preset": "angular"
-      }
-    },
+    "github": false,
     "hooks": {
       "before:npm:release": "gcloud artifacts packages delete \"@google-cloud/recaptcha-enterprise-react-native\" --project=oss-exit-gate-prod --repository=recaptcha-react-native--npm --location=us --quiet 2>/dev/null || true; npx --yes google-artifactregistry-auth --repo-config=.npmrc --credential-config=$HOME/.npmrc",
       "after:npm:release": "printf '{\"publish_all\":false,\"publishing_groups\":[{\"namespace\":\"@google-cloud\",\"packages\":[{\"name\":\"recaptcha-enterprise-react-native\",\"version\":\"${version}\"}]}]}\\n' > /tmp/exit-gate-manifest-${version}.json && gcloud storage cp /tmp/exit-gate-manifest-${version}.json gs://oss-exit-gate-prod-projects-bucket/recaptcha-react-native/npm/manifests/manifest-${version}-$(date +%s).json",
