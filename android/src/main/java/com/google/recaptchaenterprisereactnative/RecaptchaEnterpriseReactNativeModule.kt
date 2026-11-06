@@ -51,6 +51,18 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
       return RecaptchaAction.custom(actionStr)
     }
   }
+
+  private fun rejectWithException(promise: Promise, exception: Throwable) {
+    if (exception is RecaptchaException) {
+      promise.reject(exception.errorCode.toString(), exception.errorMessage, exception)
+    } else {
+      promise.reject(
+        "RN_UNKNOWN_ERROR",
+        exception.message ?: exception.toString(),
+        exception
+      )
+    }
+  }
   
   @ReactMethod
   fun fetchClient(siteKey: String, promise: Promise) {
@@ -59,35 +71,34 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
         recaptchaClient = Recaptcha.fetchClient(application, siteKey)
         promise.resolve(null)
       } catch (exception: Exception) {
-        if (exception is RecaptchaException) {
-          promise.reject(exception.errorCode.toString(), exception.errorMessage, exception)
-        } else {
-          promise.reject(exception)
-        }      
+        rejectWithException(promise, exception)
       }
     }
   }
   
+  @Suppress("DEPRECATION")
   @ReactMethod
   fun initClient(siteKey: String, arguments: ReadableMap, promise: Promise) {
     recaptchaModuleScope.launch {
-      let {
-        if (arguments.hasKey("timeout")) {
-          // JS+ReadableMap have no support for long
-          val timeout = arguments.getDouble("timeout").toLong()
-          Recaptcha.getClient(application, siteKey, timeout)
-        } else {
-          Recaptcha.getClient(application, siteKey)
+      try {
+        let {
+          if (arguments.hasKey("timeout") && !arguments.isNull("timeout")) {
+            // JS+ReadableMap have no support for long
+            val timeout = arguments.getDouble("timeout").toLong()
+            Recaptcha.getClient(application, siteKey, timeout)
+          } else {
+            Recaptcha.getClient(application, siteKey)
+          }
         }
-      }
-      .onSuccess { client ->
-        recaptchaClient = client
-        promise.resolve(null)
-      }
-      .onFailure { exception ->
-        if (exception is RecaptchaException) { promise.reject(exception.errorCode.toString(), exception.errorMessage, exception) } else {
-          promise.reject(exception)
+        .onSuccess { client ->
+          recaptchaClient = client
+          promise.resolve(null)
         }
+        .onFailure { exception ->
+          rejectWithException(promise, exception)
+        }
+      } catch (exception: Exception) {
+        rejectWithException(promise, exception)
       }
     }
   }
@@ -102,25 +113,25 @@ class RecaptchaEnterpriseReactNativeModule(reactContext: ReactApplicationContext
     val action = mapAction(actionStr)
     
     recaptchaModuleScope.launch {
-      recaptchaClient
-      .let {
-        if (arguments.hasKey("timeout")) {
-          // JS+ReadableMap have no support for long
-          val timeout = arguments.getDouble("timeout").toLong()
-          it.execute(action, timeout)
-        } else {
-          it.execute(action)
+      try {
+        recaptchaClient
+        .let {
+          if (arguments.hasKey("timeout") && !arguments.isNull("timeout")) {
+            // JS+ReadableMap have no support for long
+            val timeout = arguments.getDouble("timeout").toLong()
+            it.execute(action, timeout)
+          } else {
+            it.execute(action)
+          }
         }
-      }
-      .onSuccess { token ->
-        promise.resolve(token)
-      }
-      .onFailure { exception ->
-        if (exception is RecaptchaException) {
-          promise.reject(exception.errorCode.toString(), exception.errorMessage, exception)
-        } else {
-          promise.reject(exception)
+        .onSuccess { token ->
+          promise.resolve(token)
         }
+        .onFailure { exception ->
+          rejectWithException(promise, exception)
+        }
+      } catch (exception: Exception) {
+        rejectWithException(promise, exception)
       }
     }
   }
